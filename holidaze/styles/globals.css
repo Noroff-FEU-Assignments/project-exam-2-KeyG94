@@ -13,3 +13,9 @@ html {
   background-size: cover;
   background-position: fixed;
 }
+
+body {
+  background-image: url("../public/curve.svg");
+  background-size: cover;
+  background-blend-mode: luminosity;
+}
