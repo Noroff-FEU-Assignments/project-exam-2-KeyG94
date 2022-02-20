@@ -1,41 +1,32 @@
-.image-container {
-    img {
-        height: 500px;
-        width: 500px;
-    }
-}
-
 %shared-links {
-    color: white;
-    font-size: 16px;
-    padding: 8px 18px;
+	color: white;
+	font-size: 16px;
+	padding: 6px 20px;
 }
 
 .navigationLinks {
+	a {
+		@extend %shared-links;
+		box-shadow: inset 0 0 0 0 #f19a3e;
+		transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
-    a {
-        @extend %shared-links;
-        box-shadow: inset 0 0 0 0 #F19A3E;
-        transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-
-        &:hover {
-            box-shadow: inset 100px 0 0 0 #F19A3E;
-            transition: ease-in 100ms;
-        }
-    }
+		&:hover {
+			box-shadow: inset 100px 0 0 0 #f19a3e;
+			transition: ease-in 100ms;
+		}
+	}
 }
 
 .linksContainer {
+	a {
+		@extend %shared-links;
 
-    a {
-        @extend %shared-links;
+		&:hover {
+			color: #cfcfcf;
+		}
+	}
 
-        &:hover {
-            color: #cfcfcf;
-        }
-    }
-
-    a:first-child{
-        background-color: #F19A3E;
-    }
+	a:first-child {
+		background-color: #f19a3e;
+	}
 }

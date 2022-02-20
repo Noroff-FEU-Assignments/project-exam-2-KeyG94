@@ -1,0 +1,29 @@
+.descriptiveP {
+	text-shadow: 2px 2px 3px #000;
+}
+
+%shared-links {
+	color: white;
+	font-size: 16px;
+	width: 180px;
+	padding: 8px 60px;
+	margin: 10px;
+}
+
+.linksContainer {
+	a {
+		@extend %shared-links;
+
+		&:hover {
+			color: #cfcfcf;
+		}
+	}
+
+	a:first-child {
+		background-color: #f19a3e;
+	}
+
+	a:nth-child(2) {
+		border: 2px solid #f19a3e;
+	}
+}

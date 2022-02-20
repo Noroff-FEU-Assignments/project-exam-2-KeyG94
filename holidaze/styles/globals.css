@@ -3,19 +3,25 @@
 @tailwind utilities;
 
 html {
-  background: rgb(49, 49, 50);
-  background: linear-gradient(
-    145deg,
-    rgba(49, 49, 50, 1) 0%,
-    rgba(22, 22, 24, 1) 100%
-  );
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: fixed;
+	background: rgb(49, 49, 50);
+	background: linear-gradient(145deg, rgba(49, 49, 50, 1) 0%, rgba(22, 22, 24, 1) 80%);
+	/* background-repeat: ; */
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 
 body {
-  background-image: url("../public/curve.svg");
-  background-size: cover;
-  background-blend-mode: luminosity;
+	background-image: url("../public/curve.svg");
+	background-size: 100% 100%;
+	background-position: right top;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 500px) {
+	body {
+		width: 160vw;
+		height: 200vh;
+	}
 }
