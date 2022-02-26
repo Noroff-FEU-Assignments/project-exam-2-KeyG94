@@ -1,5 +1,5 @@
-import React from "react";
+import DashboardAdm from "../admin/DashboardAdm.jsx";
 
 export default function admin() {
-	return <div>this is admin page</div>;
+	return <DashboardAdm />;
 }
