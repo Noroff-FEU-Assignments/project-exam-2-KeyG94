@@ -16,6 +16,18 @@ module.exports = {
       white: "#FFF",
       black: "#000",
     },
+
+    fontSize: {
+      xs: ".512rem",
+      sm: ".64rem",
+      tiny: ".8rem",
+      base: "1rem",
+      lg: "1.25rem",
+      xl: "1.563rem",
+      "2xl": "1.953rem",
+      "3xl": "2.441rem",
+      "4xl": "3.052rem",
+    },
     extend: {},
   },
   plugins: [],
