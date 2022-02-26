@@ -2,7 +2,7 @@ import Layout from "../components/layout/Layout";
 import Head from "../components/layout/Head";
 import Link from "next/link";
 import { useState } from "react";
-import SearchIcon from "../components/SearchIcon";
+import SearchIcon from "../components/icons/SearchIcon";
 import SearchbarDropDown from "../components/SearchbarDropDown";
 import styles from "./Home.module.scss";
 
