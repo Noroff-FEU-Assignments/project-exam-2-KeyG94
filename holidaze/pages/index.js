@@ -3,7 +3,7 @@ import Head from "../components/layout/Head";
 import Link from "next/link";
 import { useState } from "react";
 import SearchIcon from "../components/icons/SearchIcon";
-import SearchbarDropDown from "../components/SearchbarDropDown";
+import SearchbarDropDown from "../components/countries/SearchbarDropDown";
 import styles from "./Home.module.scss";
 
 export default function Home() {
