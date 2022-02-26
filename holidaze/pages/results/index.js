@@ -1,7 +1,6 @@
-import React from "react";
 import Layout from "../../components/layout/Layout";
 import Head from "../../components/layout/Head";
-import SearchIcon from "../../components/SearchIcon";
+import SearchIcon from "../../components/icons/SearchIcon";
 import { useState } from "react";
 import Image from "next/image";
 import placeholder from "../../public/image-blur-placeholder.png";
