@@ -1,4 +1,4 @@
-import DashboardAdm from "../admin/DashboardAdm.jsx";
+import DashboardAdm from "../../components/global/admin/DashboardAdm.jsx";
 
 export default function admin() {
 	return <DashboardAdm />;
