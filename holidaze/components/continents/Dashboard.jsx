@@ -5,6 +5,7 @@ import CardTable from "../countries/CardTable";
 export default function Dashboard(props) {
 	const dashboard = props.dashboard;
 
+	console.log(dashboard);
 	// return different dashboards based on props
 
 	// if admin return this

@@ -1,7 +1,7 @@
 import React from "react";
 import AdminNav from "../../layout/AdminNav";
 import Head from "../../layout/Head";
-import Dashboard from "../../continents/Dashboard";
+import Dashboard from "../../continents/Dashboard.jsx";
 
 export default function DashboardAdm() {
 	return (
