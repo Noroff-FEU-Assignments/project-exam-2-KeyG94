@@ -1,4 +1,5 @@
 import React from "react";
+import AccomodationsTable from "../countries/AccomodationsTable";
 import CardTable from "../countries/CardTable";
 
 export default function Dashboard(props) {
@@ -36,11 +37,14 @@ export default function Dashboard(props) {
 			console.log("this is the accomodations");
 			return (
 				<div className='bg-white min-h-screen w-full'>
-					<header>
-						<h1>Dashboard Accomodations</h1>
-						<span>Logo</span>
+					<header className='flex justify-around max-w-7xl'>
+						<h1 className='font-bold text-2xl text-center'>Dashboard</h1>
+						<span className='font-bold hidden sm:block'>holidaze</span>
 					</header>
-					<main>Dasboard</main>
+					<h2 className='text-xl font-bold'>Accomodations</h2>
+					<div>
+						<AccomodationsTable />
+					</div>
 				</div>
 			);
 
