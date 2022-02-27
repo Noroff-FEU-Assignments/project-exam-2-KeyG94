@@ -2,7 +2,10 @@ import React from "react";
 
 export default function Dashboard(props) {
 	const dashboard = props.dashboard;
+
 	// return different dashboards based on props
+
+	// if admin return this
 	switch (dashboard) {
 		case "admin":
 			// do this
@@ -17,6 +20,7 @@ export default function Dashboard(props) {
 				</div>
 			);
 
+		// if accomodations return this
 		case "accomodations":
 			// do this
 			console.log("this is the accomodations");
@@ -30,6 +34,7 @@ export default function Dashboard(props) {
 				</div>
 			);
 
+		// if add return this
 		case "add":
 			// do this
 			console.log("this is the add new");
@@ -43,6 +48,7 @@ export default function Dashboard(props) {
 				</div>
 			);
 
+		// if something else, fallback with an error
 		default:
 			console.log("something wrong");
 			return (
