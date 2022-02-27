@@ -1,4 +1,5 @@
 import React from "react";
+import CardTable from "../countries/CardTable";
 
 export default function Dashboard(props) {
 	const dashboard = props.dashboard;
@@ -11,12 +12,21 @@ export default function Dashboard(props) {
 			// do this
 			console.log("this is the admin page");
 			return (
-				<div className='bg-white min-h-screen w-full'>
-					<header>
-						<h1>Dashboard Admin</h1>
-						<span>Logo</span>
+				<div className='bg-white min-h-screen w-full '>
+					<header className='flex justify-around max-w-7xl'>
+						<h1 className='font-bold text-2xl text-center'>Dashboard</h1>
+						<span className='font-bold hidden sm:block'>holidaze</span>
 					</header>
-					<main>Dasboard</main>
+					<div className='flex justify-around flex-wrap overflow-auto max-w-7xl'>
+						<div className='my-5'>
+							<h4 className='font-bold'>New Enquiries</h4>
+							<CardTable type='enquiries' />
+						</div>
+						<div className='my-5'>
+							<h4 className='font-bold'>New Messages</h4>
+							<CardTable type='messages' />
+						</div>
+					</div>
 				</div>
 			);
 
