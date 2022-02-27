@@ -54,7 +54,7 @@ export default function AdminNav({ current }) {
 	};
 
 	return (
-		<div className='sm:flex'>
+		<>
 			{/* mobile menu, hidden from small screens +  */}
 			<div className='sm:hidden bg-grey' id='mobile-menu'>
 				<div className='text-center border-b-[1px] border-lightBlack border-opacity-40 p-2 w-[90%] mx-auto'>
@@ -90,7 +90,7 @@ export default function AdminNav({ current }) {
 			</div>
 
 			{/* Menu bar for small devices, standard show */}
-			<div className='hidden sm:hidden justify-between mx-8 bg-orange' id='mobile-menu-std'>
+			<div className='hidden sm:hidden justify-between px-8 bg-white' id='mobile-menu-std'>
 				<div className='content-center p-4 mt-6 text-darkBlack'>
 					<h2 className='text-lg font-bold'>holidaze</h2>
 				</div>
@@ -140,13 +140,6 @@ export default function AdminNav({ current }) {
 					</div>
 				</nav>
 			</div>
-			<div className='container bg-white min-h-screen w-5/6'>
-				<header>
-					<h1>Dashboard</h1>
-					<span>Logo</span>
-				</header>
-				<main>Dasboard</main>
-			</div>
-		</div>
+		</>
 	);
 }
