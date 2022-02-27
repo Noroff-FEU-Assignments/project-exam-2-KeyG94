@@ -70,19 +70,19 @@ export default function AccomodationsTable() {
 								<tr>
 									<th
 										scope='col'
-										className='px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider'
+										className='px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider'
 									>
 										ID:
 									</th>
 									<th
 										scope='col'
-										className='px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider'
+										className='px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider'
 									>
 										Title
 									</th>
 									<th
 										scope='col'
-										className='px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider'
+										className='px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider'
 									>
 										Location
 									</th>

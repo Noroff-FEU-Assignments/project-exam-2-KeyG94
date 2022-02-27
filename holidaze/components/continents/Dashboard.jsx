@@ -37,12 +37,12 @@ export default function Dashboard(props) {
 			console.log("this is the accomodations");
 			return (
 				<div className='bg-white min-h-screen w-full'>
-					<header className='flex justify-around max-w-7xl'>
+					<header className='flex justify-around max-w-7xl mx-auto'>
 						<h1 className='font-bold text-2xl text-center'>Dashboard</h1>
 						<span className='font-bold hidden sm:block'>holidaze</span>
 					</header>
-					<h2 className='text-xl font-bold'>Accomodations</h2>
-					<div>
+					<div className='my-5 mx-auto max-w-7xl'>
+						<h2 className='text-xl font-bold'>Accomodations</h2>
 						<AccomodationsTable />
 					</div>
 				</div>
