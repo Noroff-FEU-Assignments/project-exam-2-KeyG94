@@ -72,7 +72,7 @@ export default function AdminNav({ current }) {
           <div>
             <h4 className="text-xl font-bold text-lightBlack">Name Nameson</h4>
           </div>
-          <Link href="/" passHref>
+          <Link href="/index" passHref>
             <button className="bg-black hover:bg-lightBlack px-6 py-1 my-4 text-white">
               Logout
             </button>
