@@ -30,7 +30,7 @@ export default function AddForm() {
         // this function takes in Formik childrens values.
 
         // Im using a setTimeout for the sake of simulating a submit as if it was submitting to an api
-        // TODO: submit the form to the correct path at the api:
+        // TODO: submit the form with a POST request to the correct path at the api:
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
           setSubmitting(false);
