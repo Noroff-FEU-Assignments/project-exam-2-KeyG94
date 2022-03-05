@@ -8,7 +8,7 @@ export default function AddPage() {
 			<Head title='Add new' />
 			<div className='sm:flex'>
 				<AdminNav current='add new' />
-				<Dashboard dashboard='add' />
+				<Dashboard dashboard='edit' />
 			</div>
 		</>
 	);
