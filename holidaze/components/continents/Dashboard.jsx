@@ -41,7 +41,7 @@ export default function Dashboard(props) {
 				<div className='bg-white min-h-screen w-full'>
 					<header className='flex justify-around max-w-7xl mx-auto'>
 						<h1 className='font-bold text-2xl text-center'>Dashboard</h1>
-						<span className='font-bold hidden sm:block'>holidaze</span>
+						<a className='font-bold hidden sm:block'>holidaze</a>
 					</header>
 					<div className='my-5 mx-auto max-w-7xl'>
 						<h2 className='text-xl font-bold'>Accomodations</h2>
@@ -59,11 +59,11 @@ export default function Dashboard(props) {
 					<header>
 						<header className='flex justify-around max-w-7xl mx-auto'>
 							<h1 className='font-bold text-2xl text-center'>Dashboard</h1>
-							<span className='font-bold hidden sm:block'>holidaze</span>
+							<a className='font-bold hidden sm:block'>holidaze</a>
 						</header>
 					</header>
 					<div className='my-5 mx-auto max-w-7xl'>
-						<h2 className='text-xl font-bold'>Add new listing</h2>
+						<h2 className='text-xl font-bold ml-20'>Add new listing</h2>
 						<AddForm />
 					</div>
 				</div>
@@ -75,7 +75,7 @@ export default function Dashboard(props) {
 					<header>
 						<header className='flex justify-around max-w-7xl mx-auto'>
 							<h1 className='font-bold text-2xl text-center'>Dashboard</h1>
-							<span className='font-bold hidden sm:block'>holidaze</span>
+							<a className='font-bold hidden sm:block'>holidaze</a>
 						</header>
 					</header>
 					<div className='my-5 mx-auto max-w-7xl'>

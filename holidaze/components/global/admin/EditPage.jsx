@@ -1,6 +1,5 @@
 import React from "react";
 import Dashboard from "../../continents/Dashboard";
-import AddForm from "../../countries/AddForm";
 import AdminNav from "../../layout/AdminNav";
 import Head from "../../layout/Head";
 
