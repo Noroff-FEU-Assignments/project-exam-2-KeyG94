@@ -1,12 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import SearchIcon from "../../icons/SearchIcon";
-import SearchbarDropDown from "../../countries/SearchbarDropDown";
+import SearchbarDropDown from "../../countries/SearchbarDropDown.jsx";
 import styles from "./Home.module.scss";
 import { useState } from "react";
 
-export default function HomePage() {
+export default function HomePage({ api }) {
 	const [search, setSearch] = useState("");
+	const [data, setData] = useState(api);
 
 	return (
 		<div className='flex justify-center items-center min-h-screen'>
@@ -23,7 +24,7 @@ export default function HomePage() {
 								value={search}
 							/>
 
-							{!search ? "" : <SearchbarDropDown />}
+							{!search ? "" : <SearchbarDropDown data={data} search={search} />}
 						</div>
 						<p className={styles.descriptiveP}>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
