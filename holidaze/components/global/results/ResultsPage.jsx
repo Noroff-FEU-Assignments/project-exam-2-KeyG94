@@ -6,65 +6,79 @@ export default function ResultsPage({ data }) {
 	const [search, setSearch] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
 	const [hotels, setHotels] = useState([]);
-
-	// Search results
-	const [foundProduct, setFoundProduct] = useState("");
+	const [foundHotels, setFoundHotels] = useState([]);
 
 	if (hotels.length === 0) {
+		// Set hotels from the prop if hotels.length is empty
+		setHotels(
+			data.map(({ attributes }) => {
+				return attributes;
+			})
+		);
+		// Set found hotels empty so that it always displays the hotels when search is empty
+		setFoundHotels(
+			data.map(({ attributes }) => {
+				return attributes;
+			})
+		);
+		// Set the loading to false so we can display our hotels
 		setIsLoading(false);
-		setHotels(data);
 	}
 
-	// const filter = () => {
-	// 	const keyword = search;
-	// 	console.log(search);
+	// The search result
+	const filter = ({ target }) => {
+		const { value } = target;
 
-	// 	if (keyword !== "") {
-	// 		const results = hotels.map(({ attributes }) => {
-	// 			const name = attributes.hotel_name;
-	// 			return name;
-	// 		});
-	// 		// const filtered = results.filter((result) => {
-	// 		// 	return result.name.toLowerCase().startsWith(keyword.toLowerCase());
-	// 	// 	});
-	// 	// 	setFoundProduct(filtered);
-	// 	// } else {
-	// 	// 	setFoundProduct(hotels);
-	// 	// }
-	// };
-
-	// console.log(foundProduct);
+		if (value !== "") {
+			const results = hotels.filter((hotel) => {
+				// Find name, location or id matches
+				return (
+					hotel.hotel_name.toLowerCase().includes(value.toLowerCase()) ||
+					hotel.hotel_location.toLowerCase().includes(value.toLowerCase()) ||
+					hotel.hotel_id.toString().startsWith(value.toLowerCase())
+				);
+				// Use the toLowerCase() method to make it case-insensitive
+			});
+			setFoundHotels(results);
+		} else {
+			setFoundHotels(hotels);
+			// If the text field is empty, show all hotels
+		}
+		setSearch(value);
+	};
 
 	return (
 		<div className='container min-h-screen'>
-			{/* //top section */}
+			{/* Top section */}
 			<div className='mx-auto my-4'>
 				<h1 className='text-4xl text-white font-semibold text-center'>Results</h1>
 				<div className='flex w-2/4 mx-auto bg-darkBlack text-white p-2'>
 					<SearchIcon />
 					<input
 						className='outline-none text-[20px] w-full bg-darkBlack'
-						placeholder='Search'
-						onChange={({ target }) => {
-							setSearch(target.value);
-							filter();
-						}}
+						type='search'
+						onChange={filter}
 						value={search}
+						placeholder='Search'
 					/>
 				</div>
 			</div>
-			{/* card section */}
+			{/* Card section */}
 			<div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8'>
 				{isLoading && <ResultCard />}
-				{!isLoading &&
-					hotels.map(({ attributes }) => {
-						const name = attributes.hotel_name;
-						const id = attributes.hotel_id;
-						const location = attributes.hotel_location;
-						const imageURL = attributes.hotel_image;
+
+				{!isLoading && foundHotels && foundHotels.length > 0 ? (
+					foundHotels.map(({ hotel_id, hotel_image, hotel_location, hotel_name }) => {
+						const name = hotel_name;
+						const id = hotel_id;
+						const location = hotel_location;
+						const imageURL = hotel_image;
 
 						return <ResultCard name={name} id={id} location={location} image={imageURL} key={id} />;
-					})}
+					})
+				) : (
+					<h1 className='text-white text-xl'>No matching results found</h1>
+				)}
 			</div>
 		</div>
 	);
