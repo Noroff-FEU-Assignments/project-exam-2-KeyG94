@@ -1,8 +1,11 @@
+import { useState } from "react";
 import Head from "../components/layout/Head";
 import Layout from "../components/layout/Layout";
 import { BASE_URL, HOTELS } from "../constants/baseUrl";
 import Image from "next/image";
 import axios from "axios";
+import BookNow from "../components/countries/BookNow";
+import placeholder from "../public/placeholder.jpeg";
 // import Router from "next/router";
 
 export const getStaticPaths = async () => {
@@ -58,17 +61,37 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export default function Hotel({ hotel }) {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [modalProduct, setModalProduct] = useState(undefined);
+
+	const name = hotel.hotel_name;
+	const id = hotel.hotel_id;
+	const location = hotel.hotel_location;
+	const description = hotel.hotel_description;
+	const image = hotel.hotel_image;
+
+	console.log(modalProduct);
+
 	return (
 		<Layout>
-			<Head title={hotel.hotel_name} />
+			<Head title={name} />
 			<div className='container flex flex-col justify-center items-center min-h-screen'>
-				<h2 className='text-white font-bold text-2xl py-4 text-center lg:text-left'>
-					{hotel.hotel_name}
-				</h2>
+				{isModalOpen && (
+					<BookNow
+						product={modalProduct}
+						closeModal={() => {
+							setIsModalOpen(false);
+							setModalProduct(undefined);
+						}}
+					/>
+				)}
+				<h2 className='text-white font-bold text-2xl py-4 text-center lg:text-left'>{name}</h2>
 				<div className='lg:bg-silver w-full flex-wrap lg:flex'>
 					<div className='flex-1 bg-white'>
 						<Image
-							src={hotel.hotel_image}
+							src={image}
+							placeholder='blur'
+							blurDataURL={placeholder}
 							height={2}
 							width={3}
 							layout='responsive'
@@ -81,15 +104,21 @@ export default function Hotel({ hotel }) {
 						<div className='lg:grid lg:grid-cols-1 lg:grid-rows-2 lg:p-4 lg:min-h-[60%]'>
 							<div className='lg:max-h-36 lg:overflow-scroll mb-2'>
 								<h3 className='text-lg font-bold'>Details</h3>
-								<p>{hotel.hotel_description}</p>
+								<p>{description}</p>
 							</div>
 							<div className='lg:max-h-36 lg:overflow-scroll'>
 								<h3 className='text-lg font-bold'>Location</h3>
-								<p>{hotel.hotel_location}</p>
+								<p>{location}</p>
 							</div>
 						</div>
 						<div className='flex justify-center relative mx-auto  my-10 pb-10 lg:pb-0'>
-							<button className='bg-orange text-white font-bold py-3 px-14 lg:absolute lg:right-12 lg:top-12'>
+							<button
+								className='bg-orange text-white font-bold py-3 px-14 lg:absolute lg:right-12 lg:top-12'
+								onClick={() => {
+									setIsModalOpen(true);
+									setModalProduct({ id, name, location, image });
+								}}
+							>
 								Book
 							</button>
 						</div>

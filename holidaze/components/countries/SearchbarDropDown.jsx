@@ -2,13 +2,8 @@ import { useState } from "react";
 import BookNow from "./BookNow.jsx";
 
 export default function SearchbarDropDown({ data, search }) {
-	//   const [show, setShow] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [modalProduct, setModalProduct] = useState(undefined);
-
-	// Remove the modal from inside the .map
-	// Have another state to store the index or the data from the card
-	// Only display in the modal the data from the selected card
 
 	return (
 		<ul className='absolute w-full -ml-2 mt-12 text-left bg-darkBlack '>
@@ -44,9 +39,6 @@ export default function SearchbarDropDown({ data, search }) {
 										Book now
 									</button>
 								</div>
-
-								{/* Modal */}
-								{/* <BookNow show={show} data={(hotel_id, hotel_name, hotel_location)} /> */}
 							</div>
 						);
 					}

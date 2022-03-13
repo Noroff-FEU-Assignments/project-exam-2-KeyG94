@@ -13,6 +13,8 @@ export default function ResultCard({ name, id, location, image }) {
 				<Link href={`/${id}`} passHref>
 					<Image
 						src={image ? image : placeholder}
+						placeholder='blur'
+						blurDataURL={placeholder}
 						alt={`Image of ${name}`}
 						className='object-center hover:scale-105 transition'
 						width={1}
