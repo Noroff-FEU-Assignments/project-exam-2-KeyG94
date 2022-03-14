@@ -12,7 +12,6 @@ const reviewSchema = yup.object({
 });
 
 export default function AddForm({ editForm }) {
-	// To use formik
 	return (
 		<Formik
 			// initial values that is used instead of state. Formik handles state, yup uses these references for validation
