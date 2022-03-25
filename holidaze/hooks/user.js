@@ -11,3 +11,5 @@ export function useAuthSession() {
 	}, [user]);
 	return user;
 }
+
+// This is to be removed as its unused per today
