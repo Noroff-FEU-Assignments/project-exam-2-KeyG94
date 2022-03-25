@@ -10,6 +10,8 @@ import placeholder from "../../public/placeholder.jpeg";
 // Navigation elements
 export default function AdminNav({ current }) {
 	const [auth, setAuth] = useContext(AuthContext);
+	const user = auth.user.username;
+
 	const navigation = [
 		{ name: "Dashboard", href: "admin", current: false },
 		{ name: "Accomodations", href: "accomodations", current: false },
@@ -69,7 +71,7 @@ export default function AdminNav({ current }) {
 						<Image src={placeholder} layout='responsive' objectFit='cover' alt='profile picture' />
 					</div>
 					<div>
-						<h4 className='text-xl font-bold text-lightBlack'>Name Nameson</h4>
+						<h4 className='text-xl font-bold text-lightBlack'>{user}</h4>
 					</div>
 					<Link href='/index' passHref>
 						<button className='bg-black hover:bg-lightBlack px-6 py-1 my-4 text-white'>
@@ -121,7 +123,7 @@ export default function AdminNav({ current }) {
 							/>
 						</div>
 						<div>
-							<h3 className='text-xl font-bold text-lightBlack'>Name Nameson</h3>
+							<h3 className='text-xl font-bold text-lightBlack'>{user}</h3>
 						</div>
 						<Link href='/' passHref>
 							<button
