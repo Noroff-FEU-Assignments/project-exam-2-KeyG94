@@ -20,15 +20,14 @@ export default function Login() {
   const [loginError, setLoginError] = useState(false);
   const [auth, setAuth] = useContext(AuthContext);
 
-  console.log(loginError);
   return (
     <>
       <div className="flex bg-silver h-screen justify-center md:items-center container">
-        <div className="py-36 md:w-1/2 md:p-24  flex flex-col md:items-center">
+        <div className="py-36 md:w-1/2 md:p-20  flex flex-col md:items-center">
           <h2 className="text-xl font-bold">Log in</h2>
           <p>
             New user?
-            <span className="text-red ml-2 font-bold">
+            <span className="text-red ml-1">
               <Link href={"/contact"}>Contact support</Link>
             </span>
           </p>
