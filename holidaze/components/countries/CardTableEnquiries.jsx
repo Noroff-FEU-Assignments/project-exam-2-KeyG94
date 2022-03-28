@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { BASE_URL, ENQUIRE, MESSAGES } from "../../constants/baseUrl.js";
+import { BASE_URL, ENQUIRE } from "../../constants/baseUrl.js";
 import AuthContext from "../../context/AuthContext";
 
 const people = [
