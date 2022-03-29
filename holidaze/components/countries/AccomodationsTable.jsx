@@ -65,8 +65,16 @@ export default function AccomodationsTable() {
     }
   };
 
+  const handleClickOutsideModal = ({ target }) => {
+    console.log(target.parentElement);
+    if (!target.parentElement.matches(".modal") && modal) {
+      setModal(false);
+      setModalProduct(null);
+    }
+  };
+
   return (
-    <div className="flex flex-col">
+    <div onClick={handleClickOutsideModal} className="flex flex-col">
       <div className="sm:-mx-6 lg:-mx-8">
         {modal && (
           <Editmodal
@@ -159,11 +167,16 @@ export default function AccomodationsTable() {
                             className="text-red"
                             onClick={() => {
                               // TODO, better ui
-                              prompt("Are you sure you want to delete this?");
-                              handleDelete(ID);
-                              setHotels(
-                                hotels.filter((hotel) => hotel.id != ID)
+                              const result = prompt(
+                                "Are you sure you want to delete this?"
                               );
+                              console.log(result);
+                              if (result != null) {
+                                handleDelete(ID);
+                                setHotels(
+                                  hotels.filter((hotel) => hotel.id != ID)
+                                );
+                              }
                             }}
                           >
                             Delete

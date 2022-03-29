@@ -14,9 +14,8 @@ const reviewSchema = yup.object({
 });
 
 const Editmodal = ({ product, closeModal, auth }) => {
-  console.log(product);
   return (
-    <div className="border-2 bg-white">
+    <div className="border-2 bg-white mx-auto sm:mt-16 p-5 fixed top-0 left-0 right-0 w-full sm:w-5/6 max-w-screen-sm modal">
       <h2 className="text-lg font-bold text-center">Edit {product.HOTEL}</h2>
       <span
         onClick={closeModal}
@@ -24,7 +23,7 @@ const Editmodal = ({ product, closeModal, auth }) => {
       >
         Close
       </span>
-      <div>
+      <div className="modal">
         <Formik
           // initial values that is used instead of state. Formik handles state, yup uses these references for validation
           initialValues={{
@@ -41,7 +40,6 @@ const Editmodal = ({ product, closeModal, auth }) => {
 
           //onSubmit prop runs a function that takes in (values, actions). I've destructured setSubmitting and resetForm ref: https://formik.org/docs/api/formik
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            console.log(values);
             // this function takes in Formik childrens values.
             const data = JSON.stringify({
               data: {
@@ -74,6 +72,7 @@ const Editmodal = ({ product, closeModal, auth }) => {
               setSubmitting(false);
               // Todo: Better ux confirming success
               alert("Your accomodation has been updated!");
+              closeModal();
             }
           }}
         >
@@ -87,15 +86,15 @@ const Editmodal = ({ product, closeModal, auth }) => {
             touched,
           }) => {
             return (
-              <div className="">
-                <Form onSubmit={handleSubmit} method="PUT">
-                  <div>
-                    <div>
-                      <span>
+              <div className="modal">
+                <Form onSubmit={handleSubmit} method="PUT" className="modal">
+                  <div className="modal">
+                    <div className="modal">
+                      <span className="modal">
                         <b>ID:</b> {values.hotel_id}
                       </span>
                     </div>
-                    <label htmlFor="name">
+                    <label htmlFor="name" className="modal">
                       <b>Hotel Name:</b> <span className="text-orange">*</span>
                     </label>
                     <p
@@ -121,8 +120,8 @@ const Editmodal = ({ product, closeModal, auth }) => {
                       placeholder="name"
                     />
                   </div>
-                  <div>
-                    <label htmlFor="name">
+                  <div className="modal">
+                    <label htmlFor="name" className="modal">
                       <b>Location:</b> <span className="text-orange">*</span>
                     </label>
                     <p
@@ -138,7 +137,7 @@ const Editmodal = ({ product, closeModal, auth }) => {
                           touched.hotel_location &&
                           errors.hotel_location}
                     </p>
-                    <div>
+                    <div className="modal">
                       <input
                         type="text"
                         id="hotel_location"
@@ -149,9 +148,9 @@ const Editmodal = ({ product, closeModal, auth }) => {
                       />
                     </div>
                   </div>
-                  <div className="md:flex md:justify-around">
-                    <div className="flex-1">
-                      <label>
+                  <div className="md:flex md:justify-around modal">
+                    <div className="flex-1 modal">
+                      <label className="modal">
                         <b>Description:</b>
                       </label>
                       <p
@@ -176,17 +175,18 @@ const Editmodal = ({ product, closeModal, auth }) => {
                         className="my-1 py-1 px-1 outline-orange w-full bottom-2 border-2"
                       />
                     </div>
-                    <div className="flex-1 ml-2">
+                    <div className="flex-1 sm:ml-2 modal">
                       <Image
                         src={values.hotel_image}
-                        width={400}
-                        height={200}
+                        layout="responsive"
+                        width={500}
+                        height={400}
                         objectFit="cover"
                         alt="product picture from api"
                       />
                     </div>
                   </div>
-                  <div className="flex justify-center mt-1">
+                  <div className="flex justify-center mt-1 modal">
                     <button
                       type="submit"
                       className={
