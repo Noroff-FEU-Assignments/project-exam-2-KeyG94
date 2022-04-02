@@ -6,3 +6,4 @@ export const HOTELS = "/hotels";
 export const ENQUIRE = "/enquires";
 export const MESSAGES = "/messages";
 export const ADMIN = "/api/auth/local";
+export const UPLOAD = "/upload";

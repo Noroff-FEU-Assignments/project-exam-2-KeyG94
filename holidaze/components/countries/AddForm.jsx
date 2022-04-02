@@ -1,161 +1,259 @@
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import placeholder from "../../public/placeholder.jpeg";
-import { Formik } from "formik";
+import { Formik, Form } from "formik";
 import * as yup from "yup";
+import { BASE_URL, HOTELS, UPLOAD } from "../../constants/baseUrl";
+import AuthContext from "../../context/AuthContext";
+import Router from "next/router";
+import axios from "axios";
 
 // yup imported from yup using npm install yup
 const reviewSchema = yup.object({
 	// object keys to refer for validation
-	hotel: yup.string().min(3).required("Hotel name is required"),
-	location: yup.string().min(3).required("Location is required"),
-	details: yup.string().min(10).required("A message is required"),
+	hotel_name: yup.string().min(3).required("Hotel name is required"),
+	hotel_location: yup.string().min(3).required("Location is required"),
+	hotel_description: yup.string().min(10).required("A message is required"),
+	hotel_image: yup.string().required("Image is required"),
 });
 
-export default function AddForm({ editForm }) {
-	return (
-		<Formik
-			// initial values that is used instead of state. Formik handles state, yup uses these references for validation
+export default function AddForm() {
+	//get state of the authentication provider
+	const [auth, setAuth] = useContext(AuthContext);
+	const [image, setImage] = useState(placeholder);
+	const [file, setFileField] = useState(false);
 
-			initialValues={
-				!editForm
-					? {
-							hotel: "",
-							location: "",
-							details: "",
-					  }
-					: {
-							// These values are whatever is passed in the param
-							id: 1,
-							hotel: "Hotel Name",
-							location: "Hotel place",
-							details: "Description of the hotel",
-					  }
-			}
-			// validation schema is run, if return is true it will handle onSubmit
-			validationSchema={reviewSchema}
-			// this is ran if validation is successful
+	const uploadImageToApi = async (form) => {
+		// Create a new config
+		const CONFIG = {
+			method: "POST",
+			url: BASE_URL + UPLOAD,
+			data: form,
+			headers: {
+				Authorization: `Bearer ${auth.jwt}`,
+			},
+		};
 
-			//onSubmit prop runs a function that takes in (values, actions). I've destructured setSubmitting and resetForm ref: https://formik.org/docs/api/formik
-			onSubmit={(values, { setSubmitting, resetForm }) => {
-				// this function takes in Formik childrens values.
+		console.log(form);
+		try {
+			const response = await axios(CONFIG);
+			console.log(response);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-				// Im using a setTimeout for the sake of simulating a submit as if it was submitting to an api
-				// TODO: submit the form with a POST request to the correct path at the api:
-				setTimeout(() => {
-					alert(JSON.stringify(values, null, 2));
-					setSubmitting(false);
-					resetForm(
-						!editForm
-							? {
-									hotel: "",
-									location: "",
-									details: "",
-							  }
-							: {
-									// Set back to their inital value
-									id: 1,
-									hotel: "Hotel Name",
-									location: "Hotel place",
-									details: "Description of the hotel",
-							  }
-					);
-				}, 400);
-			}}
-		>
-			{({ values, handleChange, handleSubmit, handleBlur, isSubmitting, errors, touched }) => (
-				<div className='max-w-lg mx-auto py-20 '>
-					<form onSubmit={handleSubmit}>
-						<fieldset className='border-2'>
-							{editForm && (
-								<div className='mt-10 mb-5 w-20 mx-auto'>
-									<div className='flex justify-between'>
-										<label htmlFor='hotel' className='font-bold p-2'>
-											ID:
-										</label>
-										<input
-											type='number'
-											id='id'
-											disabled
-											onBlur={handleBlur}
-											value={values.id}
-											className='outline-none w-full ml-1 bg-white'
-										/>
+	useEffect(() => {
+		if (!auth) Router.push("/login");
+	}, [auth]);
+
+	if (!auth) {
+		return <div />;
+	}
+
+	if (auth) {
+		return (
+			<Formik
+				// initial values that is used instead of state. Formik handles state, yup uses these references for validation
+				initialValues={{
+					hotel_name: "",
+					hotel_location: "",
+					hotel_description: "",
+					hotel_image: "",
+				}}
+				// validation schema is run, if return is true it will handle onSubmit
+				validationSchema={reviewSchema}
+				// this is ran if validation is successful
+
+				//onSubmit prop runs a function that takes in (values, actions). I've destructured setSubmitting and resetForm ref: https://formik.org/docs/api/formik
+				onSubmit={async (values, { setSubmitting, resetForm }) => {
+					// this function takes in Formik childrens values.
+					console.log(values);
+					const data = JSON.stringify({
+						data: {
+							hotel_name: values.hotel_name,
+							hotel_location: values.hotel_location,
+							hotel_description: values.hotel_description,
+						},
+					});
+
+					const CONFIG = {
+						method: "POST",
+						url: BASE_URL + HOTELS,
+						data,
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${auth.jwt}`,
+						},
+					};
+
+					try {
+						const response = await axios(CONFIG);
+						console.log(response);
+
+						//handle bad response
+						if (response.status !== 200) {
+							alert(response.statusText);
+						}
+
+						// Handle image upload
+						// new formData
+						let formData = new FormData();
+
+						// handle error on file
+						if (!file) {
+							alert("Error! Seems like you are missing an image");
+							stop;
+						}
+
+						// append file to formdata
+						if (file) {
+							formData.append("files", file, file.name);
+						}
+
+						// Attach a ref id ref: strapi docs
+						const refId = response.data.data.id;
+
+						formData.append("refId", refId);
+						formData.append("ref", "hotel");
+						formData.append("field", "image");
+
+						uploadImageToApi(formData);
+					} catch (error) {
+						console.log(error);
+					} finally {
+						setSubmitting(false);
+					}
+					// Im using a setTimeout for the sake of simulating a submit as if it was submitting to an api
+					// TODO: submit the form with a POST request to the correct path at the api:
+					// setTimeout(() => {
+					// 	alert(JSON.stringify(values, null, 2));
+					// 	setSubmitting(false);
+					// 	resetForm({
+					// 		hotel: "",
+					// 		location: "",
+					// 		details: "",
+					// 	});
+					// }, 400);
+				}}
+			>
+				{({
+					values,
+					handleChange,
+					setFieldValue,
+					handleSubmit,
+					handleBlur,
+					isSubmitting,
+					errors,
+					touched,
+				}) => (
+					<div className='max-w-lg mx-auto py-20 '>
+						<Form onSubmit={handleSubmit}>
+							<fieldset className='border-2'>
+								<div className='mt-10 mb-5 w-1/2 mx-auto'>
+									<p className='text-red'>
+										{errors.hotel_name && touched.hotel_name && errors.hotel_name}
+									</p>
+									<div className='border-2'>
+										{/* First Name input field */}
+										<div className='flex justify-between'>
+											<label htmlFor='hotel' className='font-bold p-2 bg-black text-white w-32'>
+												Hotel:
+											</label>
+											<input
+												type='text'
+												id='hotel_name'
+												onChange={handleChange}
+												onBlur={handleBlur}
+												value={values.hotel_name}
+												className='outline-none w-full ml-1'
+											/>
+										</div>
 									</div>
 								</div>
-							)}
-							<div className='mt-10 mb-5 w-1/2 mx-auto'>
-								<p className='text-red'>{errors.hotel && touched.hotel && errors.hotel}</p>
-								<div className='border-2'>
-									{/* First Name input field */}
-									<div className='flex justify-between'>
-										<label htmlFor='hotel' className='font-bold p-2 bg-black text-white w-32'>
-											Hotel:
+								<div className='mb-5 w-1/2 mx-auto'>
+									<p className='text-red'>
+										{errors.hotel_location && touched.hotel_location && errors.hotel_location}
+									</p>
+									<div className='flex justify-between border-2'>
+										<label
+											htmlFor='hotel_location'
+											className='font-bold bg-black text-white p-2 w-32'
+										>
+											Location:
 										</label>
 										<input
 											type='text'
-											id='hotel'
+											id='hotel_location'
 											onChange={handleChange}
 											onBlur={handleBlur}
-											value={values.hotel}
+											value={values.hotel_location}
 											className='outline-none w-full ml-1'
 										/>
 									</div>
 								</div>
-							</div>
-							<div className='mb-5 w-1/2 mx-auto'>
-								<p className='text-red'>{errors.location && touched.location && errors.location}</p>
-								<div className='flex justify-between border-2'>
-									<label htmlFor='location' className='font-bold bg-black text-white p-2 w-32'>
-										Location:
-									</label>
+								<div className='w-1/2 mx-auto my-10'>
+									<Image
+										src={image}
+										layout='responsive'
+										objectFit='cover'
+										width={1}
+										height={1}
+										alt='product picture from api'
+									/>
 									<input
-										type='text'
-										id='location'
-										onChange={handleChange}
-										onBlur={handleBlur}
-										value={values.location}
-										className='outline-none w-full ml-1'
+										type='file'
+										name='hotel_image'
+										accept='image/*'
+										onChange={({ target }) => {
+											let reader = new FileReader();
+											reader.readAsDataURL(target.files[0]);
+											setFileField(target.files[0]);
+											reader.onload = ({ target }) => {
+												setImage(target.result);
+											};
+											setFieldValue("hotel_image", target.files[0]);
+										}}
 									/>
+									<p className='text-red'>
+										{errors.hotel_image && touched.hotel_image && errors.hotel_image}
+									</p>
 								</div>
-							</div>
-							<div className='w-1/2 mx-auto my-10'>
-								<Image
-									src={placeholder}
-									layout='responsive'
-									objectFit='cover'
-									alt='product picture from api'
-								/>
-							</div>
-							<div className='mt-10 mb-5 w-5/6 mx-auto'>
-								<p className='text-red'>{errors.details && touched.details && errors.details}</p>
-								<div className='border-2'>
-									<textarea
-										className='resize-none w-full h-72 p-2 outline-none'
-										name='details'
-										id='details'
-										placeholder='Details'
-										value={values.details}
-										onChange={handleChange}
-									/>
+								<div className='mt-10 mb-5 w-5/6 mx-auto'>
+									<p className='text-red'>
+										{errors.hotel_description &&
+											touched.hotel_description &&
+											errors.hotel_description}
+									</p>
+									<div className='border-2'>
+										<textarea
+											className='resize-none w-full h-72 p-2 outline-none'
+											name='hotel_description'
+											id='hotel_description'
+											placeholder='Details'
+											value={values.hotel_description}
+											onChange={handleChange}
+										/>
+									</div>
 								</div>
-							</div>
-							<div className='w-2/6 mx-auto flex justify-center my-10'>
-								<button
-									type='submit'
-									className={
-										!isSubmitting
-											? "bg-orange w-full p-3 text-white font-semibold"
-											: "bg-grey w-full p-3 text-white font-semibold"
-									}
-									disabled={isSubmitting}
-								>
-									{isSubmitting ? "Submitting..." : "Save"}
-								</button>
-							</div>
-						</fieldset>
-					</form>
-				</div>
-			)}
-		</Formik>
-	);
+								<div className='w-2/6 mx-auto flex justify-center my-10'>
+									<button
+										type='submit'
+										className={
+											!isSubmitting
+												? "bg-orange w-full p-3 text-white font-semibold"
+												: "bg-grey w-full p-3 text-white font-semibold"
+										}
+										disabled={isSubmitting}
+									>
+										{isSubmitting ? "Submitting..." : "Save"}
+									</button>
+								</div>
+							</fieldset>
+						</Form>
+					</div>
+				)}
+			</Formik>
+		);
+	}
 }
