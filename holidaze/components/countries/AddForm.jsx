@@ -7,6 +7,7 @@ import { BASE_URL, HOTELS, UPLOAD } from "../../constants/baseUrl";
 import AuthContext from "../../context/AuthContext";
 import Router from "next/router";
 import axios from "axios";
+import { updateHotelImageUrl } from "../../utills/updateHotelImageUrl.js";
 
 // yup imported from yup using npm install yup
 const reviewSchema = yup.object({
@@ -18,12 +19,12 @@ const reviewSchema = yup.object({
 });
 
 export default function AddForm() {
-	//get state of the authentication provider
-	const [auth, setAuth] = useContext(AuthContext);
+	// Get state of the authentication provider
+	const [auth] = useContext(AuthContext);
 	const [image, setImage] = useState(placeholder);
 	const [file, setFileField] = useState(false);
 
-	const uploadImageToApi = async (form) => {
+	const uploadImageToApi = async (form, id, data) => {
 		// Create a new config
 		const CONFIG = {
 			method: "POST",
@@ -34,10 +35,12 @@ export default function AddForm() {
 			},
 		};
 
-		console.log(form);
 		try {
 			const response = await axios(CONFIG);
 			console.log(response);
+
+			// Request an update to add the image url from cloudinary
+			updateHotelImageUrl(id, response.data[0].url, auth, data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -65,7 +68,7 @@ export default function AddForm() {
 				validationSchema={reviewSchema}
 				// this is ran if validation is successful
 
-				//onSubmit prop runs a function that takes in (values, actions). I've destructured setSubmitting and resetForm ref: https://formik.org/docs/api/formik
+				// onSubmit prop runs a function that takes in (values, actions). I've destructured setSubmitting and resetForm ref: https://formik.org/docs/api/formik
 				onSubmit={async (values, { setSubmitting, resetForm }) => {
 					// this function takes in Formik childrens values.
 					console.log(values);
@@ -91,7 +94,7 @@ export default function AddForm() {
 						const response = await axios(CONFIG);
 						console.log(response);
 
-						//handle bad response
+						// Handle bad response
 						if (response.status !== 200) {
 							alert(response.statusText);
 						}
@@ -100,7 +103,7 @@ export default function AddForm() {
 						// new formData
 						let formData = new FormData();
 
-						// handle error on file
+						// Handle error on file
 						if (!file) {
 							alert("Error! Seems like you are missing an image");
 							stop;
@@ -108,33 +111,29 @@ export default function AddForm() {
 
 						// append file to formdata
 						if (file) {
-							formData.append("files", file, file.name);
+							formData.append(`files`, file, file.name);
 						}
 
 						// Attach a ref id ref: strapi docs
 						const refId = response.data.data.id;
 
 						formData.append("refId", refId);
-						formData.append("ref", "hotel");
+						formData.append("ref", "api::hotel.hotel");
 						formData.append("field", "image");
 
-						uploadImageToApi(formData);
+						uploadImageToApi(formData, refId, data);
 					} catch (error) {
 						console.log(error);
 					} finally {
-						setSubmitting(false);
+						setTimeout(() => {
+							setSubmitting(false);
+							resetForm({
+								hotel_name: "",
+								hotel_location: "",
+								hotel_description: "",
+							});
+						}, 400);
 					}
-					// Im using a setTimeout for the sake of simulating a submit as if it was submitting to an api
-					// TODO: submit the form with a POST request to the correct path at the api:
-					// setTimeout(() => {
-					// 	alert(JSON.stringify(values, null, 2));
-					// 	setSubmitting(false);
-					// 	resetForm({
-					// 		hotel: "",
-					// 		location: "",
-					// 		details: "",
-					// 	});
-					// }, 400);
 				}}
 			>
 				{({

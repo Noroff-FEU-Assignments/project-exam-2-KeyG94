@@ -23,11 +23,11 @@ export const getStaticPaths = async () => {
 		// the array is on the response.data.data property
 		hotel = response.data.data;
 
-		const paths = hotel.map(({ attributes }) => {
-			const id = attributes.hotel_id.toString();
+		const paths = hotel.map(({ id }) => {
+			const ID = id.toString();
 			return {
 				params: {
-					slug: id,
+					slug: ID,
 				},
 			};
 		});
@@ -53,6 +53,7 @@ export const getStaticProps = async ({ params }) => {
 		return {
 			props: {
 				hotel,
+				id,
 			},
 		};
 	} catch (err) {
@@ -60,17 +61,14 @@ export const getStaticProps = async ({ params }) => {
 	}
 };
 
-export default function Hotel({ hotel }) {
+export default function Hotel({ hotel, id }) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [modalProduct, setModalProduct] = useState(undefined);
 
 	const name = hotel.hotel_name;
-	const id = hotel.hotel_id;
 	const location = hotel.hotel_location;
 	const description = hotel.hotel_description;
 	const image = hotel.hotel_image;
-
-	console.log(modalProduct);
 
 	return (
 		<Layout>
