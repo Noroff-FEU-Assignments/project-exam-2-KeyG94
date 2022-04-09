@@ -7,11 +7,11 @@ import Dashboard from "../../continents/Dashboard";
 
 export default function AddPage() {
 	//get state of the authentication provider
-	const [auth, setAuth] = useContext(AuthContext);
+	const [auth] = useContext(AuthContext);
 
 	useEffect(() => {
 		if (!auth) Router.push("/login");
-	}, [auth]);
+	}, []);
 
 	if (!auth) {
 		return <div />;
