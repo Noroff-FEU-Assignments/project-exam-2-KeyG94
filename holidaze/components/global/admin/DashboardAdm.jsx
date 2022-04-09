@@ -6,19 +6,18 @@ import AuthContext from "../../../context/AuthContext";
 import Router from "next/router";
 
 export default function DashboardAdm() {
-	//get state of the authentication provider
-	const [auth, setAuth] = useContext(AuthContext);
+	const [auth] = useContext(AuthContext);
 
 	useEffect(() => {
 		if (!auth) Router.push("/login");
-	}, [auth]);
+	}, []);
 
+	// Handle auth checking while loading
 	if (!auth) {
 		return <div />;
 	}
 
 	if (auth) {
-		console.log(auth);
 		return (
 			<>
 				<Head title='Dashboard' />

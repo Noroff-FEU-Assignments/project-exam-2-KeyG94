@@ -5,26 +5,26 @@ import AuthContext from "../../context/AuthContext";
 import Editmodal from "./EditModal.jsx";
 
 export default function AccomodationsTable() {
-	const [auth, setAuth] = useContext(AuthContext);
+	const [auth] = useContext(AuthContext);
 	const [hotels, setHotels] = useState(false);
 	const [modal, setModal] = useState(false);
 	const [modalProduct, setModalProduct] = useState({});
 
-	if (auth) {
-		const CONFIG = {
-			method: "GET",
-			url: BASE_URL + HOTELS,
-			headers: {
-				Authorization: `Bearer ${auth.jwt}`,
-			},
-		};
-	}
-
 	useEffect(() => {
+		if (auth) {
+			// Appears unused but is used by getMessages
+			const CONFIG = {
+				method: "GET",
+				url: BASE_URL + HOTELS,
+				headers: {
+					Authorization: `Bearer ${auth.jwt}`,
+				},
+			};
+		}
+
 		const getMessages = async () => {
 			try {
 				const res = await axios(CONFIG);
-
 				setHotels(res.data.data);
 			} catch (error) {
 				console.log(error);
@@ -71,7 +71,7 @@ export default function AccomodationsTable() {
 				)}
 				<div className='py-2 align-middle inline-block w-full sm:px-6 lg:px-8'>
 					<div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
-						<table className='w-full divide-y divide-gray-200'>
+						<table className='bg-orange w-full divide-y divide-gray-200'>
 							<thead>
 								<tr>
 									<th
@@ -95,7 +95,7 @@ export default function AccomodationsTable() {
 									</th>
 								</tr>
 							</thead>
-							<tbody className='bg-white hover:bg-silver divide-y divide-gray-200'>
+							<tbody className='bg-white divide-y divide-gray-200'>
 								{!hotels ? (
 									<div>Loading..</div>
 								) : (
@@ -107,7 +107,7 @@ export default function AccomodationsTable() {
 										const ID = id;
 
 										return (
-											<tr key={ID}>
+											<tr key={ID} className='hover:bg-orange transition duration-200'>
 												<td className='px-6 py-2 whitespace-nowrap'>
 													<div className='flex items-center'>
 														<div className='ml-4'>
@@ -124,7 +124,6 @@ export default function AccomodationsTable() {
 												<td className='px-6 py-2 whitespace-nowrap text-right text-tiny font-medium'>
 													<span
 														onClick={() => {
-															// TODO: Open a modal, with all details and make a PUT request.
 															setModalProduct({
 																HOTEL,
 																LOCATION,
@@ -133,21 +132,18 @@ export default function AccomodationsTable() {
 																ID,
 															});
 															setModal(true);
-
-															console.log(ID);
 														}}
-														className='text-indigo-600 hover:text-indigo-900 cursor-pointer'
+														className='text-indigo-600 hover:text-silver cursor-pointer'
 													>
 														Edit
 													</span>
 												</td>
 												<td className='px-4 py-2 whitespace-nowrap text-right text-tiny font-medium hover:cursor-pointer'>
 													<span
-														className='text-red'
+														className='text-red hover:text-silver'
 														onClick={() => {
 															// TODO, better ui
 															const result = prompt("Are you sure you want to delete this?");
-															console.log(result);
 															if (result != null) {
 																handleDelete(ID);
 																setHotels(hotels.filter((hotel) => hotel.id != ID));
