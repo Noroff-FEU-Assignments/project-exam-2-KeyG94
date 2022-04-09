@@ -30,38 +30,39 @@ export default function AdminNav({ current }) {
 		}
 	}
 
+	const popDownMenu = document.getElementById("mobile-menu");
+	const mobileMenu = document.getElementById("mobile-menu-std");
+
 	// hide menubar when click
 	const closeMenu = () => {
-		const x = document.getElementById("mobile-menu");
-		const y = document.getElementById("mobile-menu-std");
-
-		if ((x.style.display = "hidden")) {
-			x.style.display = "none";
-			y.style.display = "flex";
-		} else {
-			x.style.display = "flex";
-			y.style.display = "none";
+		if (mobileMenu.classList.contains("hidden")) {
+			mobileMenu.classList.remove("hidden");
+			popDownMenu.classList.add("hidden");
 		}
 	};
 
 	// open navigation bar
 	const openMenu = () => {
-		const x = document.getElementById("mobile-menu");
-		const y = document.getElementById("mobile-menu-std");
-
-		if ((y.style.display = "hidden")) {
-			y.style.display = "none";
-			x.style.display = "block";
-		} else {
-			y.style.display = "flex";
-			x.style.display = "none";
+		if (popDownMenu.classList.contains("hidden")) {
+			popDownMenu.classList.remove("hidden");
+			mobileMenu.classList.add("hidden");
 		}
 	};
 
 	return (
 		<>
+			{/* Menu bar for small devices, standard show */}
+			<div className='sm:hidden flex justify-between px-5 bg-silver py-5' id='mobile-menu-std'>
+				<div className='content-center my-auto text-darkBlack'>
+					<h2 className='text-lg font-bold'>holidaze</h2>
+				</div>
+				<div className='w-16 rounded-full overflow-hidden' onClick={openMenu}>
+					<Image src={placeholder} layout='responsive' objectFit='cover' alt='profile picture' />
+				</div>
+			</div>
+
 			{/* mobile menu, hidden from small screens +  */}
-			<div className='sm:hidden bg-grey' id='mobile-menu'>
+			<div className='hidden sm:hidden bg-grey' id='mobile-menu'>
 				<div className='text-center border-b-[1px] border-lightBlack border-opacity-40 p-2 w-[90%] mx-auto'>
 					<h3 className='text-center text-white font-bold'>holidaze</h3>
 					<div
@@ -95,19 +96,6 @@ export default function AdminNav({ current }) {
 							</Link>
 						);
 					})}
-				</div>
-			</div>
-
-			{/* Menu bar for small devices, standard show */}
-			<div className='hidden sm:hidden justify-between px-8 bg-white' id='mobile-menu-std'>
-				<div className='content-center p-4 mt-6 text-darkBlack'>
-					<h2 className='text-lg font-bold'>holidaze</h2>
-				</div>
-				<div
-					className='w-16  my-4 border-[1px] border-lightBlack rounded-full overflow-hidden'
-					onClick={openMenu}
-				>
-					<Image src={placeholder} layout='responsive' objectFit='cover' alt='profile picture' />
 				</div>
 			</div>
 

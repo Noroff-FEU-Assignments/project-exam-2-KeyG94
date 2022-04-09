@@ -76,7 +76,7 @@ export default function CardTable() {
 										const DATE = attributes.createdAt.slice(0, 9);
 
 										return (
-											<tr key={ID} className='hover:bg-orange'>
+											<tr key={ID} className='hover:bg-orange transition duration-200'>
 												<td className='px-2 py-2 whitespace-nowrap'>{ID}</td>
 												<td className='px-2 py-2 whitespace-nowrap'>
 													<div className='flex items-center'>
