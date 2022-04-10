@@ -3,23 +3,37 @@ import AccomodationsTable from "../countries/AccomodationsTable";
 import AddForm from "../countries/AddForm";
 import CardTableEnquiries from "../countries/CardTableEnquiries";
 import CardTableMessages from "../countries/CardTableMessages";
+import * as FaIcons from "react-icons/fa";
+import * as GrIcons from "react-icons/Gr";
 
-export default function Dashboard({ dashboard }) {
+export default function Dashboard({ dashboard, setSideBar, showSideBar }) {
 	// if admin return this
 	switch (dashboard) {
 		case "admin":
 			return (
-				<div className='bg-white min-h-screen w-full'>
-					<header className='flex justify-around max-w-7xl'>
+				<div className='bg-white min-h-screen flex-1'>
+					<header className='flex justify-center'>
+						<div
+							onClick={setSideBar}
+							className={!showSideBar ? "hidden" : "hidden md:block p-5 min-h-screen fixed left-0"}
+						>
+							<FaIcons.FaBars />
+						</div>
+						<div
+							onClick={setSideBar}
+							className={!showSideBar ? "hidden md:block p-5 min-h-screen fixed left-0" : "hidden"}
+						>
+							<GrIcons.GrClose />
+						</div>
 						<h1 className='font-bold text-2xl text-center'>Dashboard</h1>
-						<span className='font-bold hidden sm:block'>holidaze</span>
+						<span className='font-bold hidden md:block fixed left-20'>holidaze</span>
 					</header>
-					<div className='flex justify-around flex-wrap overflow-auto '>
-						<div className='my-5'>
+					<div className='flex justify-center flex-wrap overflow-auto'>
+						<div className='my-5 mx-5'>
 							<h4 className='font-bold pb-5'>New Enquiries</h4>
 							<CardTableEnquiries />
 						</div>
-						<div className='my-5'>
+						<div className='my-5 mx-5'>
 							<h4 className='font-bold pb-5'>New Messages</h4>
 							<CardTableMessages />
 						</div>
@@ -30,12 +44,24 @@ export default function Dashboard({ dashboard }) {
 		// if accomodations return this
 		case "accomodations":
 			return (
-				<div className='bg-white min-h-screen w-full'>
-					<header className='flex justify-around max-w-7xl mx-auto'>
+				<div className='bg-white min-h-screen flex-1'>
+					<header className='flex justify-center'>
+						<div
+							onClick={setSideBar}
+							className={!showSideBar ? "hidden" : "hidden md:block p-5 min-h-screen fixed left-0"}
+						>
+							<FaIcons.FaBars />
+						</div>
+						<div
+							onClick={setSideBar}
+							className={!showSideBar ? "hidden md:block p-5 min-h-screen fixed left-0" : "hidden"}
+						>
+							<GrIcons.GrClose />
+						</div>
 						<h1 className='font-bold text-2xl text-center'>Dashboard</h1>
-						<a className='font-bold hidden sm:block'>holidaze</a>
+						<span className='font-bold hidden md:block fixed left-20'>holidaze</span>
 					</header>
-					<div className='my-5 mx-auto max-w-7xl'>
+					<div className='my-5 mx-10 md:ml-60'>
 						<h2 className='text-xl font-bold'>Accomodations</h2>
 						<AccomodationsTable />
 					</div>
@@ -43,41 +69,46 @@ export default function Dashboard({ dashboard }) {
 			);
 		case "add":
 			return (
-				<div className='bg-white min-h-screen w-full'>
-					<header>
-						<header className='flex justify-around max-w-7xl mx-auto'>
-							<h1 className='font-bold text-2xl text-center'>Dashboard</h1>
-							<a className='font-bold hidden sm:block'>holidaze</a>
-						</header>
+				<div className='bg-white min-h-screen flex-1'>
+					<header className='flex justify-center'>
+						<div
+							onClick={setSideBar}
+							className={!showSideBar ? "hidden" : "hidden md:block p-5 min-h-screen fixed left-0"}
+						>
+							<FaIcons.FaBars />
+						</div>
+						<div
+							onClick={setSideBar}
+							className={!showSideBar ? "hidden md:block p-5 min-h-screen fixed left-0" : "hidden"}
+						>
+							<GrIcons.GrClose />
+						</div>
+						<h1 className='font-bold text-2xl text-center'>Dashboard</h1>
+						<span className='font-bold hidden md:block fixed left-20'>holidaze</span>
 					</header>
-					<div className='my-5 mx-auto max-w-7xl'>
-						<h2 className='text-xl font-bold ml-20'>Add new listing</h2>
+					<div className=''>
+						<h2 className='text-xl font-bold text-center'>Add new listing</h2>
 						<AddForm />
-					</div>
-				</div>
-			);
-
-		case "edit":
-			return (
-				<div className='bg-white min-h-screen w-full'>
-					<header>
-						<header className='flex justify-around max-w-7xl mx-auto'>
-							<h1 className='font-bold text-2xl text-center'>Dashboard</h1>
-							<a className='font-bold hidden sm:block'>holidaze</a>
-						</header>
-					</header>
-					<div className='my-5 mx-auto max-w-7xl'>
-						<h2 className='text-xl font-bold ml-20'>Edit listing</h2>
-						<AddForm editForm={true} />
 					</div>
 				</div>
 			);
 
 		// if something else, fallback with an error
 		default:
-			console.log("something wrong");
 			return (
 				<div className='bg-white min-h-screen w-full'>
+					<div
+						onClick={setSideBar}
+						className={!showSideBar ? "hidden" : "hidden md:block p-5 min-h-screen fixed"}
+					>
+						<FaIcons.FaBars />
+					</div>
+					<div
+						onClick={setSideBar}
+						className={!showSideBar ? "hidden md:block p-5 min-h-screen fixed z-10" : "hidden"}
+					>
+						<GrIcons.GrClose />
+					</div>
 					<header>
 						<h1>Looks like theres an error, please contact support</h1>
 						<span>Logo</span>
