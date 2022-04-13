@@ -15,15 +15,22 @@ const reviewSchema = yup.object({
 
 const Editmodal = ({ product, closeModal, auth }) => {
 	return (
-		<div className='border-2 bg-white mx-auto sm:mt-16 p-5 fixed top-0 left-0 right-0 w-full sm:w-5/6 max-w-screen-sm modal'>
-			<h2 className='text-lg font-bold text-center'>Edit {product.HOTEL}</h2>
-			<span
-				onClick={closeModal}
-				className='text-red font-bold cursor-pointer border-2 px-2 absolute right-5'
+		<div
+			className='fixed z-10 right-0 top-0 w-full h-full overflow-auto bg-darkBlack bg-opacity-80'
+			onClick={closeModal}
+		>
+			<div
+				className='bg-white rounded-sm mx-auto my-[10%] p-5 relative md:max-w-[600px]'
+				onClick={(e) => e.stopPropagation()}
 			>
-				Close
-			</span>
-			<div className='modal'>
+				<h2 className='text-lg font-bold text-center'>Edit {product.HOTEL}</h2>
+				<button
+					onClick={closeModal}
+					className='text-red font-bold cursor-pointer border-2 px-2 absolute right-5 z-10'
+				>
+					Close
+				</button>
+
 				<Formik
 					// initial values that is used instead of state. Formik handles state, yup uses these references for validation
 					initialValues={{
@@ -62,7 +69,6 @@ const Editmodal = ({ product, closeModal, auth }) => {
 
 						try {
 							const response = await axios(CONFIG);
-							console.log(response);
 							if (response.status !== 200) {
 								alert(response.statusText);
 							}
@@ -78,42 +84,40 @@ const Editmodal = ({ product, closeModal, auth }) => {
 				>
 					{({ values, handleChange, handleSubmit, handleBlur, isSubmitting, errors, touched }) => {
 						return (
-							<div className='modal'>
-								<Form onSubmit={handleSubmit} method='PUT' className='modal'>
-									<div className='modal'>
-										<div className='modal'>
-											<span className='modal'>
-												<b>ID:</b> {values.hotel_id}
-											</span>
-										</div>
-										<label htmlFor='name' className='modal'>
-											<b>Hotel Name:</b> <span className='text-orange'>*</span>
-										</label>
-										<p className={Object.keys(errors).length === 0 ? "opacity-0" : "text-red"}>
-											{Object.keys(errors).length === 0
-												? "empty"
-												: errors.hotel_name && touched.hotel_name && errors.hotel_name}
-										</p>
-										<input
-											type='text'
-											id='hotel_name'
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.hotel_name}
-											className='my-1 py-1 px-1 outline-orange border-2'
-											placeholder='name'
-										/>
-									</div>
-									<div className='modal'>
-										<label htmlFor='name' className='modal'>
-											<b>Location:</b> <span className='text-orange'>*</span>
-										</label>
-										<p className={Object.keys(errors).length === 0 ? "opacity-0" : "text-red"}>
-											{Object.keys(errors).length === 0
-												? "empty"
-												: errors.hotel_location && touched.hotel_location && errors.hotel_location}
-										</p>
-										<div className='modal'>
+							<Form onSubmit={handleSubmit} method='PUT'>
+								<div className='flex flex-wrap justify-center'>
+									<div className='flex-1'>
+										<div className='grid px-5'>
+											<p className='font-bold'>
+												ID: <span>{values.hotel_id}</span>
+											</p>
+											<label htmlFor='name'>
+												<p className='font-bold'>
+													Hotel Name: <span className='text-orange'>*</span>
+												</p>
+											</label>
+											<input
+												type='text'
+												id='hotel_name'
+												onChange={handleChange}
+												onBlur={handleBlur}
+												value={values.hotel_name}
+												className='my-1 py-1 px-1 outline-orange border-2'
+												placeholder='name'
+											/>
+											<p className={Object.keys(errors).length === 0 ? "opacity-0" : "text-red"}>
+												{Object.keys(errors).length !== 0 &&
+													errors.hotel_name &&
+													touched.hotel_name &&
+													errors.hotel_name}
+											</p>
+
+											<label htmlFor='name'>
+												<p className='font-bold'>
+													Location: <span className='text-orange'>*</span>
+												</p>
+											</label>
+
 											<input
 												type='text'
 												id='hotel_location'
@@ -122,19 +126,21 @@ const Editmodal = ({ product, closeModal, auth }) => {
 												value={values.hotel_location}
 												className='my-1 py-1 px-1 outline-orange border-2'
 											/>
-										</div>
-									</div>
-									<div className='md:flex md:justify-around modal'>
-										<div className='flex-1 modal'>
-											<label className='modal'>
-												<b>Description:</b>
+											<p className={Object.keys(errors).length === 0 ? "opacity-0" : "text-red"}>
+												{Object.keys(errors).length !== 0 &&
+													errors.hotel_location &&
+													touched.hotel_location &&
+													errors.hotel_location}
+											</p>
+
+											<label htmlFor='description'>
+												<p className='font-bold'>Description:</p>
 											</label>
 											<p className={Object.keys(errors).length === 0 ? "opacity-0" : "text-red"}>
-												{Object.keys(errors).length === 0
-													? "empty"
-													: errors.hotel_description &&
-													  touched.hotel_description &&
-													  errors.hotel_description}
+												{Object.keys(errors).length !== 0 &&
+													errors.hotel_description &&
+													touched.hotel_description &&
+													errors.hotel_description}
 											</p>
 											<textarea
 												type='text'
@@ -142,35 +148,35 @@ const Editmodal = ({ product, closeModal, auth }) => {
 												onChange={handleChange}
 												onBlur={handleBlur}
 												value={values.hotel_description}
-												className='my-1 py-1 px-1 outline-orange w-full bottom-2 border-2'
-											/>
-										</div>
-										<div className='flex-1 sm:ml-2 modal'>
-											<Image
-												src={values.hotel_image}
-												layout='responsive'
-												width={500}
-												height={400}
-												objectFit='cover'
-												alt='product picture from api'
+												className='my-1 py-1 px-1 outline-orange bottom-2 border-2 h-full resize-none'
 											/>
 										</div>
 									</div>
-									<div className='flex justify-center mt-1 modal'>
-										<button
-											type='submit'
-											className={
-												!isSubmitting
-													? "bg-orange py-2 px-8 my-1 text-white"
-													: "bg-grey py-2 px-8 my-1 text-white"
-											}
-											disabled={isSubmitting}
-										>
-											{isSubmitting ? "Updating..." : "Update"}
-										</button>
+
+									<div className='flex-none w-1/2 sm:flex-1 mt-14'>
+										<Image
+											src={values.hotel_image}
+											layout='responsive'
+											width={1}
+											height={1}
+											objectFit='cover'
+											alt='product picture from api'
+										/>
 									</div>
-								</Form>
-							</div>
+								</div>
+
+								<div className='mt-1 flex justify-center'>
+									<button
+										type='submit'
+										className={`bg-orange py-2 px-8 my-1 mx-auto text-white hover:bg-opacity-80 transition duration-200 ${
+											isSubmitting && "bg-grey"
+										}`}
+										disabled={isSubmitting}
+									>
+										{isSubmitting ? "Updating..." : "Update"}
+									</button>
+								</div>
+							</Form>
 						);
 					}}
 				</Formik>
