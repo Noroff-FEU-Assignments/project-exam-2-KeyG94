@@ -1,8 +1,10 @@
+import { useState } from "react";
 import Image from "next/image";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { BASE_URL, ENQUIRE } from "../../constants/baseUrl";
+import GKConfirmationBox from "../global/utills/GKConfirmationBox";
 
 // yup imported from yup using npm install yup
 const reviewSchema = yup.object({
@@ -15,6 +17,16 @@ const reviewSchema = yup.object({
 });
 
 export default function BookNow({ product, closeModal }) {
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState(false);
+  const [error, setError] = useState(false);
+
+  if (status) {
+    setTimeout(() => {
+      setStatus(false);
+    }, 2500);
+  }
+
   return (
     <div
       className="fixed z-10 top-0 left-0 h-full w-full bg-darkBlack overflow-auto bg-opacity-80"
@@ -70,12 +82,14 @@ export default function BookNow({ product, closeModal }) {
 
             try {
               const response = await axios(CONFIG);
-              console.log(response);
+              setMessage("Thank you for your submission!");
               if (response.status !== 200) {
-                alert(response.statusText);
+                setMessage(response.statusText);
               }
             } catch (error) {
               console.log(error);
+              setError(true);
+              setMessage("An error occured");
             } finally {
               setSubmitting(false);
               resetForm({
@@ -88,8 +102,7 @@ export default function BookNow({ product, closeModal }) {
                 enquiry_name: "",
                 enquiry_email: "",
               });
-              // Todo: Better ux confirming success
-              alert("Your booking has been recieved!");
+              setStatus(true);
             }
           }}
         >
@@ -197,6 +210,14 @@ export default function BookNow({ product, closeModal }) {
                     >
                       {isSubmitting ? "Booking..." : "Send Booking"}
                     </button>
+                    {status && (
+                      <GKConfirmationBox
+                        color={!error ? "green" : "red"}
+                        type={!error ? "success" : "error"}
+                        message={message}
+                        redirectPath="/"
+                      />
+                    )}
                   </div>
                 </Form>
               </div>
