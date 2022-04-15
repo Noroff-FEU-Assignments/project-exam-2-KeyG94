@@ -82,9 +82,12 @@ export default function BookNow({ product, closeModal }) {
 
             try {
               const response = await axios(CONFIG);
-              setMessage("Thank you for your submission!");
               if (response.status !== 200) {
                 setMessage(response.statusText);
+              }
+              if (response.status === 200) {
+                setMessage("Thank you for your submission!");
+                setStatus(true);
               }
             } catch (error) {
               console.log(error);
@@ -102,7 +105,6 @@ export default function BookNow({ product, closeModal }) {
                 enquiry_name: "",
                 enquiry_email: "",
               });
-              setStatus(true);
             }
           }}
         >

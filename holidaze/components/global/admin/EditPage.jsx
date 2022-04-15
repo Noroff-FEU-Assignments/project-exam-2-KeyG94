@@ -7,23 +7,23 @@ import AdminNav from "../../layout/AdminNav";
 import Head from "../../layout/Head";
 
 export default function EditPage() {
-	//get state of the authentication provider
-	const [auth, setAuth] = useContext(AuthContext);
+  //get state of the authentication provider
+  const [auth] = useContext(AuthContext);
 
-	useEffect(() => {
-		if (!auth) Router.push("/login");
-	}, [auth]);
+  useEffect(() => {
+    if (!auth) Router.push("/login");
+  }, [auth]);
 
-	if (!auth) {
-		return <div />;
-	}
-	return (
-		<>
-			<Head title='Edit' />
-			<div className='sm:flex'>
-				<AdminNav />
-				<Dashboard dashboard='edit' />
-			</div>
-		</>
-	);
+  if (!auth) {
+    return <div />;
+  }
+  return (
+    <>
+      <Head title="Edit" />
+      <div className="sm:flex">
+        <AdminNav />
+        <Dashboard dashboard="edit" />
+      </div>
+    </>
+  );
 }
