@@ -2,7 +2,7 @@ import Router from "next/router";
 import * as GIIcon from "react-icons/gi";
 import * as MDIcon from "react-icons/md";
 
-const GKConfirmationBoxBackground = ({ children }) => {
+export const GKModalBackground = ({ children }) => {
   return (
     <div className="fixed w-full h-full top-0 right-0 bg-darkBlack bg-opacity-0">
       {children}
@@ -10,17 +10,12 @@ const GKConfirmationBoxBackground = ({ children }) => {
   );
 };
 
-export default function GKConfirmationBox({
-  color,
-  message,
-  type,
-  redirectPath,
-}) {
+export const GKConfirmationBox = ({ color, message, type, redirectPath }) => {
   setTimeout(() => {
     Router.push(redirectPath);
   }, 3000);
   return (
-    <GKConfirmationBoxBackground>
+    <GKModalBackground>
       <div className="flex justify-between w-[175px] mx-auto my-[5%] rounded-md bg-white overflow-auto z-20 p-5 shadow-md">
         <div className="flex-1">
           {type === "success" && (
@@ -37,6 +32,6 @@ export default function GKConfirmationBox({
           <p>{message}</p>
         </div>
       </div>
-    </GKConfirmationBoxBackground>
+    </GKModalBackground>
   );
-}
+};
