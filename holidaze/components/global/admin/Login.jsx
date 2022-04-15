@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { LOGIN_URL, ADMIN } from "../../../constants/baseUrl";
 import AuthContext from "../../../context/AuthContext";
 import axios from "axios";
-import GKConfirmationBox from "../utills/GKConfirmationBox";
+import { GKConfirmationBox } from "../utills/GKConfirmationBox";
 
 // yup imported from yup using npm install yup
 const reviewSchema = yup.object({

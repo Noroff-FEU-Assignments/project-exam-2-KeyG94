@@ -4,7 +4,7 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { BASE_URL, ENQUIRE } from "../../constants/baseUrl";
-import GKConfirmationBox from "../global/utills/GKConfirmationBox";
+import { GKConfirmationBox } from "../global/utills/GKConfirmationBox";
 
 // yup imported from yup using npm install yup
 const reviewSchema = yup.object({
