@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BASE_URL, HOTELS } from "../../constants/baseUrl.js";
 import AuthContext from "../../context/AuthContext";
@@ -75,14 +75,14 @@ export default function AccomodationsTable() {
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-1 text-left text-tiny font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-2 py-1 text-left text-tiny font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Title
                 </th>
 
                 <th
                   scope="col"
-                  className="hidden md:block px-6 py-1 text-left text-tiny font-medium text-gray-500 uppercase tracking-wider"
+                  className="hidden md:block px-2 py-1 text-left text-tiny font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Location
                 </th>
@@ -104,7 +104,7 @@ export default function AccomodationsTable() {
                       key={ID}
                       className="hover:bg-orange transition duration-200"
                     >
-                      <td className="px-6 py-2 whitespace-nowrap">
+                      <td className="px-2 py-2 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="ml-4">
                             <div className=" text-tiny font-medium text-gray-900">
@@ -113,15 +113,15 @@ export default function AccomodationsTable() {
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-2 whitespace-nowrap">
+                      <td className="px-2 py-2 whitespace-nowrap">
                         <div className="text-tiny text-gray-900">{HOTEL}</div>
                       </td>
-                      <td className="hidden md:block px-6 py-4 whitespace-nowrap">
+                      <td className="hidden md:block px-2 py-4 whitespace-nowrap">
                         <div className="text-tiny text-gray-900">
                           {LOCATION}
                         </div>
                       </td>
-                      <td className="px-6 py-2 whitespace-nowrap text-right text-tiny font-medium">
+                      <td className="px-2 py-2 whitespace-nowrap text-right text-tiny font-medium">
                         <span
                           onClick={() => {
                             setModalProduct({
