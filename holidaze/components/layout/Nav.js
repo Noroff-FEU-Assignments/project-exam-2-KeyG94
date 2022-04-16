@@ -5,8 +5,8 @@ import logo from "../../public/Asset 6.svg";
 import styles from "./Nav.module.scss";
 import AuthContext from "../../context/AuthContext";
 
-export default function Nav() {
-  const [auth, setAuth] = useContext(AuthContext);
+const Nav = () => {
+  const [auth] = useContext(AuthContext);
   const [name, setName] = useState("Login");
 
   useEffect(() => {
@@ -14,6 +14,7 @@ export default function Nav() {
       setName(auth.user.username);
     }
   });
+
   return (
     <nav className="container flex py-6 justify-between">
       {/* Company log  */}
@@ -44,4 +45,6 @@ export default function Nav() {
       {/* End of display hidden */}
     </nav>
   );
-}
+};
+
+export default Nav;
