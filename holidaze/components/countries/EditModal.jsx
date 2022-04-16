@@ -5,6 +5,7 @@ import axios from "axios";
 import { BASE_URL, HOTELS } from "../../constants/baseUrl";
 import Image from "next/image";
 import { GKConfirmationBox } from "../global/utills/GKConfirmationBox";
+import { GKCloseButton } from "../global/utills/GKCloseButton";
 
 // yup imported from yup using npm install yup
 const reviewSchema = yup.object({
@@ -36,12 +37,7 @@ const Editmodal = ({ product, closeModal, auth }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-lg font-bold text-center">Edit {product.HOTEL}</h2>
-        <button
-          onClick={closeModal}
-          className="text-red font-bold cursor-pointer border-2 px-2 absolute right-5 z-10"
-        >
-          Close
-        </button>
+        <GKCloseButton closeModal={closeModal} />
 
         <Formik
           // initial values that is used instead of state. Formik handles state, yup uses these references for validation
@@ -108,7 +104,7 @@ const Editmodal = ({ product, closeModal, auth }) => {
           }) => {
             return (
               <Form onSubmit={handleSubmit} method="PUT">
-                <div className="flex flex-wrap justify-center">
+                <div className="flex flex-wrap justify-center my-5">
                   <div className="flex-1">
                     <div className="grid px-5">
                       <p className="font-bold">
@@ -194,7 +190,7 @@ const Editmodal = ({ product, closeModal, auth }) => {
                     </div>
                   </div>
 
-                  <div className="flex-none w-1/2 sm:flex-1 mt-14">
+                  <div className="flex-none w-1/2 sm:flex-1">
                     <Image
                       src={values.hotel_image}
                       layout="responsive"
