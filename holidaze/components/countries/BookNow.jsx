@@ -5,6 +5,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { BASE_URL, ENQUIRE } from "../../constants/baseUrl";
 import { GKConfirmationBox } from "../global/utills/GKConfirmationBox";
+import { GKCloseButton } from "../global/utills/GKCloseButton";
 
 // yup imported from yup using npm install yup
 const reviewSchema = yup.object({
@@ -37,12 +38,7 @@ export default function BookNow({ product, closeModal }) {
         className="bg-silver p-5 w-80 mx-auto bg-opacity-95 text-black my-[10%] rounded-sm shadow relative flex justify-center"
         onClick={(e) => e.stopPropagation()}
       >
-        <span
-          onClick={closeModal}
-          className="text-red font-bold absolute right-5 hover:cursor-pointer border-2 px-2 transition duration-200 hover:bg-red hover:text-white hover:border-red"
-        >
-          Close
-        </span>
+        <GKCloseButton onClick={closeModal} />
         <Formik
           // initial values that is used instead of state. Formik handles state, yup uses these references for validation
           initialValues={{
