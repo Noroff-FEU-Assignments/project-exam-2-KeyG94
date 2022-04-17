@@ -36,7 +36,9 @@ export default function AdminNav({ current, showSideBar, setSideBar }) {
       {showSideBar && (
         <div className="flex md:hidden justify-between px-5 bg-orange py-5">
           <div className="content-center my-auto text-darkBlack">
-            <h2 className="text-lg font-bold">holidaze</h2>
+            <Link href={"/"} passHref>
+              <h2 className="text-lg font-bold cursor-pointer">holidaze</h2>
+            </Link>
           </div>
           <div
             className="w-16 rounded-full overflow-hidden"
@@ -56,7 +58,11 @@ export default function AdminNav({ current, showSideBar, setSideBar }) {
       {!showSideBar && (
         <div className="md:hidden bg-orange">
           <div className="text-center border-b-[1px] border-lightBlack border-opacity-40 p-2 w-[90%] mx-auto">
-            <h3 className="text-center text-white font-bold">holidaze</h3>
+            <Link href={"/"} passHref>
+              <h3 className="text-center text-white font-bold cursor-pointer">
+                holidaze
+              </h3>
+            </Link>
             <div
               className="w-28 mx-auto my-4 border-[1px] border-lightBlack rounded-full overflow-hidden"
               onClick={setSideBar}
