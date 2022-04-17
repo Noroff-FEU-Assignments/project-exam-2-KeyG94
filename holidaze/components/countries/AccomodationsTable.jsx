@@ -155,7 +155,6 @@ export default function AccomodationsTable() {
                     <span
                       className="text-red hover:text-silver"
                       onClick={() => {
-                        // TODO, better ui
                         const result = prompt(
                           "Are you sure you want to delete this?"
                         );
