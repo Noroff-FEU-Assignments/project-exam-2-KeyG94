@@ -8,6 +8,8 @@ import { LOGIN_URL, ADMIN } from "../../../constants/baseUrl";
 import AuthContext from "../../../context/AuthContext";
 import axios from "axios";
 import { GKConfirmationBox } from "../utills/GKConfirmationBox";
+import { GKCloseButton } from "../utills/GKCloseButton";
+import Router from "next/router";
 
 // yup imported from yup using npm install yup
 const reviewSchema = yup.object({
@@ -23,7 +25,8 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex bg-silver h-screen justify-center md:items-center container">
+      <div className="flex bg-silver h-screen justify-center md:items-center relative container">
+        <GKCloseButton closeModal={() => Router.push("/")} />
         <div className="py-36 md:w-1/2 md:p-20  flex flex-col md:items-center">
           <h2 className="text-xl font-bold">Log in</h2>
           <p>
