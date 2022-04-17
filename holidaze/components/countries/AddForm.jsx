@@ -10,6 +10,7 @@ import axios from "axios";
 import { updateHotelImageUrl } from "../../utills/updateHotelImageUrl.js";
 import { GKConfirmationBox } from "../global/utills/GKConfirmationBox";
 import GKLoadingModal from "../global/utills/GKLoadingModal";
+import { GKFormInput } from "../global/utills/GKInput";
 
 // yup imported from yup using npm install yup
 const reviewSchema = yup.object({
@@ -160,7 +161,7 @@ export default function AddForm() {
           errors,
           touched,
         }) => (
-          <div className="max-w-lg mx-auto py-20 ">
+          <div className="max-w-lg mx-auto mt-5">
             <Form onSubmit={handleSubmit}>
               <fieldset className="border-2">
                 <div className="mt-10 mb-5 w-1/2 mx-auto">
@@ -170,23 +171,15 @@ export default function AddForm() {
                       errors.hotel_name}
                   </p>
                   <div className="border-2">
-                    {/* First Name input field */}
-                    <div className="flex justify-between">
-                      <label
-                        htmlFor="hotel"
-                        className="font-bold p-2 bg-black text-white w-32"
-                      >
-                        Hotel:
-                      </label>
-                      <input
-                        type="text"
-                        id="hotel_name"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.hotel_name}
-                        className="outline-none w-full ml-1"
-                      />
-                    </div>
+                    <GKFormInput
+                      htmlfor="hotel"
+                      label="Hotel"
+                      type="text"
+                      id="hotel_name"
+                      onchange={handleChange}
+                      onblur={handleBlur}
+                      value={values.hotel_name}
+                    />
                   </div>
                 </div>
                 <div className="mb-5 w-1/2 mx-auto">
@@ -196,19 +189,13 @@ export default function AddForm() {
                       errors.hotel_location}
                   </p>
                   <div className="flex justify-between border-2">
-                    <label
-                      htmlFor="hotel_location"
-                      className="font-bold bg-black text-white p-2 w-32"
-                    >
-                      Location:
-                    </label>
-                    <input
+                    <GKFormInput
+                      htmlfor="hotel_location"
+                      label="Location"
                       type="text"
-                      id="hotel_location"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.hotel_location}
-                      className="outline-none w-full ml-1"
+                      onchange={handleChange}
+                      onblur={handleBlur}
+                      value={values.hotel_name}
                     />
                   </div>
                 </div>
