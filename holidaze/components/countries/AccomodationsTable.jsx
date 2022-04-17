@@ -4,12 +4,16 @@ import { BASE_URL, HOTELS } from "../../constants/baseUrl.js";
 import AuthContext from "../../context/AuthContext";
 import Editmodal from "./EditModal.jsx";
 import GKLoadingModal from "../global/utills/GKLoadingModal.jsx";
+import { GKConfirmationBox } from "../global/utills/GKConfirmationBox.jsx";
 
 export default function AccomodationsTable() {
   const [auth] = useContext(AuthContext);
   const [hotels, setHotels] = useState(false);
   const [modal, setModal] = useState(false);
   const [modalProduct, setModalProduct] = useState({});
+  const [confirmationBox, setConfirmationBox] = useState(false);
+  const [message, setMessage] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (auth) {
@@ -44,9 +48,16 @@ export default function AccomodationsTable() {
     };
     try {
       await axios(config);
-      alert("Hotel was succesfully removed");
+      setMessage("Success");
+      setConfirmationBox(true);
     } catch (error) {
       console.log(error);
+      setMessage("An error occured");
+      setError(true);
+    } finally {
+      setTimeout(() => {
+        setConfirmationBox(false);
+      }, 2000);
     }
   };
 
@@ -60,6 +71,14 @@ export default function AccomodationsTable() {
             setModal(false);
             setModalProduct(null);
           }}
+        />
+      )}
+      {confirmationBox && (
+        <GKConfirmationBox
+          color={!error ? "green" : "red"}
+          message={message}
+          type={!error ? "success" : "error"}
+          redirectPath={false}
         />
       )}
       <table className="shadow rounded bg-orange mx-auto divide-y divide-lightBlack">
