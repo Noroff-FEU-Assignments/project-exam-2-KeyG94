@@ -5,6 +5,7 @@ import CardTableEnquiries from "../countries/CardTableEnquiries";
 import CardTableMessages from "../countries/CardTableMessages";
 import * as FaIcons from "react-icons/fa";
 import * as GrIcons from "react-icons/Gr";
+import Link from "next/link";
 
 export default function Dashboard({ dashboard, setSideBar, showSideBar }) {
   // if admin return this
@@ -34,9 +35,11 @@ export default function Dashboard({ dashboard, setSideBar, showSideBar }) {
               <GrIcons.GrClose />
             </div>
             <h1 className="font-bold text-2xl text-center">Dashboard</h1>
-            <span className="font-bold hidden md:block fixed left-20">
-              holidaze
-            </span>
+            <Link href={"/"} passHref>
+              <span className="font-bold hidden md:block fixed left-20 cursor-pointer">
+                holidaze
+              </span>
+            </Link>
           </header>
           <div
             className={`flex justify-center flex-wrap overflow-scroll ${
@@ -81,9 +84,11 @@ export default function Dashboard({ dashboard, setSideBar, showSideBar }) {
               <GrIcons.GrClose />
             </div>
             <h1 className="font-bold text-2xl text-center">Dashboard</h1>
-            <span className="font-bold hidden md:block fixed left-20">
-              holidaze
-            </span>
+            <Link href={"/"} passHref>
+              <span className="font-bold hidden md:block fixed left-20 cursor-pointer">
+                holidaze
+              </span>
+            </Link>
           </header>
           <div className={`my-5 ${!showSideBar && "md:ml-60"}`}>
             <h2 className="text-xl font-bold text-center my-5">
@@ -118,9 +123,11 @@ export default function Dashboard({ dashboard, setSideBar, showSideBar }) {
               <GrIcons.GrClose />
             </div>
             <h1 className="font-bold text-2xl text-center">Dashboard</h1>
-            <span className="font-bold hidden md:block fixed left-20">
-              holidaze
-            </span>
+            <Link href={"/"} passHref>
+              <span className="font-bold hidden md:block fixed left-20 cursor-pointer">
+                holidaze
+              </span>
+            </Link>
           </header>
           <div className={`my-5 ${!showSideBar && "md:ml-60"}`}>
             <h2 className="text-xl font-bold text-center">Add new listing</h2>
@@ -153,9 +160,13 @@ export default function Dashboard({ dashboard, setSideBar, showSideBar }) {
           </div>
           <header>
             <h1>Looks like theres an error, please contact support</h1>
-            <span>Logo</span>
+            <Link href={"/"} passHref>
+              <span className="font-bold hidden md:block fixed left-20 cursor-pointer">
+                holidaze
+              </span>
+            </Link>
           </header>
-          <main>Dasboard</main>
+          <main>Dashboard</main>
         </div>
       );
   }
