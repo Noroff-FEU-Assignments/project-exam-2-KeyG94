@@ -39,7 +39,7 @@ const Nav = () => {
       <div className={styles.linksContainer}>
         <div className="hidden sm:flex sm:justify-around sm:w-36 sm:pt-2">
           <Link href="/contact">Contact</Link>
-          <Link href="/login">{name}</Link>
+          <Link href="/admin">{name}</Link>
         </div>
       </div>
       {/* End of display hidden */}
