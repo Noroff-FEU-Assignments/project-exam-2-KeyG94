@@ -34,7 +34,7 @@ export default function AdminNav({ current, showSideBar, setSideBar }) {
     <div className="bg-grey md:max-w-max">
       {/* Menu bar for small devices, standard show */}
       {showSideBar && (
-        <div className="flex md:hidden justify-between px-5 bg-silver py-5">
+        <div className="flex md:hidden justify-between px-5 bg-orange py-5">
           <div className="content-center my-auto text-darkBlack">
             <h2 className="text-lg font-bold">holidaze</h2>
           </div>
@@ -54,7 +54,7 @@ export default function AdminNav({ current, showSideBar, setSideBar }) {
 
       {/* mobile menu, hidden from small screens +  */}
       {!showSideBar && (
-        <div className="md:hidden bg-grey">
+        <div className="md:hidden bg-orange">
           <div className="text-center border-b-[1px] border-lightBlack border-opacity-40 p-2 w-[90%] mx-auto">
             <h3 className="text-center text-white font-bold">holidaze</h3>
             <div
