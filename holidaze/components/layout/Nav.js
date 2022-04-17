@@ -21,7 +21,9 @@ const Nav = () => {
       <div className="w-2/3 sm:w-1/3">
         <div className="w-36 hover:cursor-pointer">
           <Link href="/" passHref>
-            <Image src={logo} layout="responsive" alt="holidaze logo" />
+            <a>
+              <Image src={logo} layout="responsive" alt="holidaze logo" />
+            </a>
           </Link>
         </div>
       </div>
