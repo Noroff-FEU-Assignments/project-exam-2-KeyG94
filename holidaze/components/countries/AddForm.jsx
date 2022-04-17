@@ -193,9 +193,10 @@ export default function AddForm() {
                       htmlfor="hotel_location"
                       label="Location"
                       type="text"
+                      id="hotel_location"
                       onchange={handleChange}
                       onblur={handleBlur}
-                      value={values.hotel_name}
+                      value={values.hotel_location}
                     />
                   </div>
                 </div>
