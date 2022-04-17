@@ -15,7 +15,7 @@ const ResultCard = ({ name, id, location, image }) => {
         <p>{id ? id : "Loading.."}</p>
       </div>
       <Link href={`/${id}`} passHref>
-        <div
+        <a
           className="bg-gray-200 aspect-square rounded-md lg:h-80 lg:aspect-none cursor-pointer"
           onClick={() => setIsLoading(true)}
         >
@@ -28,7 +28,7 @@ const ResultCard = ({ name, id, location, image }) => {
             layout="responsive"
             objectFit="cover"
           />
-        </div>
+        </a>
       </Link>
       <p className="text-white">{location ? location : "Loading.."}</p>
     </div>
