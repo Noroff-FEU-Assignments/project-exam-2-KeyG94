@@ -15,12 +15,13 @@ html {
   background-attachment: fixed;
 }
 
-body {
-  background-image: url("../public/curve.svg");
-  background-size: 100% 100%;
-  background-position: right top;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+@media only screen and (min-width: 582px) {
+  body {
+    background-image: url("../public/curve.svg");
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
 }
 
 /* @media only screen and (max-width: 500px) {
