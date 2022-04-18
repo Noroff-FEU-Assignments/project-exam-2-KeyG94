@@ -6,6 +6,7 @@ import axios from "axios";
 import { BASE_URL, ENQUIRE } from "../../constants/baseUrl";
 import { GKConfirmationBox } from "../global/utills/GKConfirmationBox";
 import { GKCloseButton } from "../global/utills/GKCloseButton";
+import { GKValidationFormInput } from "../global/utills/GKValidationFormInput";
 
 // yup imported from yup using npm install yup
 const reviewSchema = yup.object({
@@ -29,16 +30,18 @@ export default function BookNow({ product, closeModal }) {
   }
 
   return (
+    // background div, covers the whole screen and reacts to interaction
     <div
       className="fixed z-10 top-0 left-0 h-full w-full bg-darkBlack overflow-auto bg-opacity-80"
       onClick={closeModal}
     >
+      {/* The modal, stopPropagation to prevent bubbling */}
       <div
         id="booking-modal"
         className="bg-silver p-5 w-80 mx-auto bg-opacity-95 text-black my-[10%] rounded-sm shadow relative flex justify-center"
         onClick={(e) => e.stopPropagation()}
       >
-        <GKCloseButton onClick={closeModal} />
+        <GKCloseButton closeModal={closeModal} />
         <Formik
           // initial values that is used instead of state. Formik handles state, yup uses these references for validation
           initialValues={{
@@ -89,6 +92,7 @@ export default function BookNow({ product, closeModal }) {
               console.log(error);
               setError(true);
               setMessage("An error occured");
+              setStatus(true);
             } finally {
               setSubmitting(false);
               resetForm({
@@ -116,7 +120,7 @@ export default function BookNow({ product, closeModal }) {
             return (
               <div className="grid">
                 <Form onSubmit={handleSubmit} method="POST">
-                  <h2 className=" text-lg font-bold text-center">Enquiry</h2>
+                  <h2 className="text-lg font-bold text-center">Enquiry</h2>
                   <span>
                     <b>Hotel Name:</b> {values.enquiry_hotel}
                   </span>
@@ -139,71 +143,55 @@ export default function BookNow({ product, closeModal }) {
                     </span>
                   </div>
                   <div className="grid mt-1">
-                    <div>
-                      <p
-                        className={
-                          Object.keys(errors).length === 0
-                            ? "opacity-0"
-                            : "text-red"
-                        }
-                      >
-                        {Object.keys(errors).length === 0
-                          ? "empty"
-                          : errors.enquiry_name &&
-                            touched.enquiry_name &&
-                            errors.enquiry_name}
-                      </p>
-                      <div>
-                        <label htmlFor="enquiry_name">
-                          Name: <span className="text-orange">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          id="enquiry_name"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.enquiry_name}
-                          className="my-1 py-1 px-1 outline-orange w-full"
-                          placeholder="name"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <span
-                        className={
-                          Object.keys(errors).length === 0
-                            ? "opacity-0"
-                            : "text-red"
-                        }
-                      >
-                        {Object.keys(errors).length === 0
-                          ? "empty"
-                          : errors.enquiry_email &&
-                            touched.enquiry_email &&
-                            errors.enquiry_email}
-                      </span>
-                      <div>
-                        <label htmlFor="email">
-                          Email: <span className="text-orange">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          id="enquiry_email"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.enquiry_email}
-                          className="my-1 py-1 px-1 outline-orange w-full"
-                          placeholder="email"
-                        />
-                      </div>
-                    </div>
+                    <GKValidationFormInput
+                      errors={
+                        errors.enquiry_name === undefined
+                          ? ""
+                          : errors.enquiry_name
+                      }
+                      name="name"
+                      touched={
+                        touched.enquiry_name === undefined
+                          ? ""
+                          : touched.enquiry_name
+                      }
+                      label="Name"
+                      htmlfor="enquiry_name"
+                      required={true}
+                      type="text"
+                      id="enquiry_name"
+                      onchange={handleChange}
+                      onblur={handleBlur}
+                      value={values.enquiry_name}
+                      placeholder="name"
+                    />
+                    <GKValidationFormInput
+                      errors={
+                        errors.enquiry_email === undefined
+                          ? ""
+                          : errors.enquiry_email
+                      }
+                      name="email"
+                      touched={
+                        touched.enquiry_email === undefined
+                          ? ""
+                          : touched.enquiry_email
+                      }
+                      label="Email"
+                      htmlfor="enquiry_email"
+                      required={true}
+                      type="text"
+                      id="enquiry_email"
+                      onchange={handleChange}
+                      onblur={handleBlur}
+                      value={values.enquiry_email}
+                      placeholder="name"
+                    />
                     <button
                       type="submit"
-                      className={
-                        !isSubmitting
-                          ? "bg-orange py-2 my-1 text-white"
-                          : "bg-grey py-2 my-1 text-white"
-                      }
+                      className={`py-2 my-1 text-white ${
+                        !isSubmitting ? "bg-orange" : "bg-grey"
+                      }`}
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? "Booking..." : "Send Booking"}
