@@ -12,7 +12,7 @@ export default function HomePage({ api }) {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col text-center text-white mx-auto">
-        <div className=" w-3/4 mx-auto">
+        <div className="w-11/12 mx-auto">
           <h1 className="text-3xl sm:text-5xl font-bold">
             Find your reservation today!
           </h1>
