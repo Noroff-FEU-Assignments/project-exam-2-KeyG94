@@ -6,7 +6,7 @@ export default function SearchbarDropDown({ data, search }) {
   const [modalProduct, setModalProduct] = useState({});
 
   return (
-    <ul className="absolute w-full -ml-2 mt-12 text-left bg-darkBlack ">
+    <ul className="absolute w-full h-60 overflow-scroll -ml-2 mt-12 text-left bg-darkBlack ">
       {isModalOpen && (
         <BookNow
           product={modalProduct}
@@ -26,7 +26,7 @@ export default function SearchbarDropDown({ data, search }) {
             hotel_location.toLowerCase().includes(search.toLowerCase())
           ) {
             return (
-              <div key={index}>
+              <li key={index}>
                 <div className="flex justify-between p-3 border-b-2 hover:bg-lightBlack hover:cursor-pointer">
                   <span>{hotel_name}</span>
                   <span>{hotel_location}</span>
@@ -45,7 +45,7 @@ export default function SearchbarDropDown({ data, search }) {
                     Book now
                   </button>
                 </div>
-              </div>
+              </li>
             );
           }
         })
