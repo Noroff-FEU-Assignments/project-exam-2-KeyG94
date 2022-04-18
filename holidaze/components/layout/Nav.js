@@ -8,6 +8,30 @@ import AuthContext from "../../context/AuthContext";
 const Nav = () => {
   const [auth] = useContext(AuthContext);
   const [name, setName] = useState("Login");
+  const [scrolled, setScrolled] = useState(false);
+
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    if (offset > 10) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  });
+
+  if (typeof window !== "undefined") {
+    const navbar = document.querySelector(".navbar");
+
+    if (scrolled) {
+      navbar.classList.add("bg-darkBlack");
+    } else {
+      navbar.classList.remove("bg-darkBlack");
+    }
+  }
 
   useEffect(() => {
     if (auth) {
@@ -16,35 +40,41 @@ const Nav = () => {
   });
 
   return (
-    <nav className="container flex py-6 justify-between">
+    <nav
+      className={`py-2 px-5 sticky top-0 z-50 transition-all duration-200 navbar ${
+        scrolled && "bg-opacity-95"
+      }`}
+    >
       {/* Company log  */}
-      <div className="w-2/3 sm:w-1/3">
-        <div className="w-36 hover:cursor-pointer">
-          <Link href="/" passHref>
-            <a>
-              <Image src={logo} layout="responsive" alt="holidaze logo" />
-            </a>
-          </Link>
-        </div>
-      </div>
-
-      <div className="w-1/3">
-        <div className={styles.navigationLinks}>
-          <div className="flex flex-wrap xs:flex-nowrap justify-around sm:w-1/3 pt-2 ">
-            <Link href="/">Home</Link>
-            <Link href="/results">Results</Link>
+      <div className="container flex justify-between">
+        <div className="w-2/3 sm:w-1/3">
+          <div className="hover:cursor-pointer py-5 xs:py-1 w-36">
+            <Link href="/" passHref>
+              <a>
+                <Image src={logo} layout="responsive" alt="holidaze logo" />
+              </a>
+            </Link>
           </div>
         </div>
-      </div>
 
-      {/* display hidden on small devices, this is in footer  */}
-      <div className={styles.linksContainer}>
-        <div className="hidden sm:flex sm:justify-around sm:w-36 sm:pt-2">
-          <Link href="/contact">Contact</Link>
-          <Link href="/admin">{name}</Link>
+        <div className="w-1/3">
+          <div className={styles.navigationLinks}>
+            <div className="flex flex-wrap xs:flex-nowrap justify-around sm:w-1/3 pt-2 ">
+              <Link href="/">Home</Link>
+              <Link href="/results">Results</Link>
+            </div>
+          </div>
         </div>
+
+        {/* display hidden on small devices, this is in footer  */}
+        <div className={styles.linksContainer}>
+          <div className="hidden sm:flex sm:justify-around sm:w-36 sm:pt-2">
+            <Link href="/contact">Contact</Link>
+            <Link href="/admin">{name}</Link>
+          </div>
+        </div>
+        {/* End of display hidden */}
       </div>
-      {/* End of display hidden */}
     </nav>
   );
 };
