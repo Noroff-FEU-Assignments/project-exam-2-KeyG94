@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Nav from "./Nav";
 
 export default function Layout({ children }) {
@@ -9,9 +10,9 @@ export default function Layout({ children }) {
         <div className="container flex flex-col sm:flex sm:flex-row sm:justify-between ">
           <span>© 2022 Glenn Key. All Rights Reserved.</span>
           <span>
-            <a href="/contact" className="hover:text-white">
+            <Link href="/contact" className="hover:text-white">
               Contact
-            </a>
+            </Link>
           </span>
         </div>
       </footer>

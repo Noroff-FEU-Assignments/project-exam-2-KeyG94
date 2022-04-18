@@ -2,7 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["upload.wikimedia.org"],
+    domains: [
+      "upload.wikimedia.org",
+      "enigmatic-sierra-33843.herokuapp.com",
+      "res.cloudinary.com",
+    ],
   },
 };
 
