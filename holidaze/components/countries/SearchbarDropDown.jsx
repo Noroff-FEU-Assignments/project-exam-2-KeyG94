@@ -6,7 +6,7 @@ export default function SearchbarDropDown({ data, search }) {
   const [modalProduct, setModalProduct] = useState({});
 
   return (
-    <ul className="absolute w-full max-h-60 overflow-scroll -ml-2 mt-12 text-left bg-darkBlack ">
+    <ul className="absolute w-full max-h-60 overflow-scroll -ml-2 mt-12 text-left bg-darkBlack">
       {isModalOpen && (
         <BookNow
           product={modalProduct}
@@ -26,24 +26,24 @@ export default function SearchbarDropDown({ data, search }) {
             hotel_location.toLowerCase().includes(search.toLowerCase())
           ) {
             return (
-              <li key={index}>
-                <div className="flex justify-between p-3 border-b-2 hover:bg-lightBlack hover:cursor-pointer">
-                  <span>{hotel_name}</span>
-                  <span>{hotel_location}</span>
-                  <button
-                    onClick={() => {
-                      setIsModalOpen(true);
-                      setModalProduct({
-                        id,
-                        hotel_name,
-                        hotel_location,
-                        hotel_image,
-                        hotel_description,
-                      });
-                    }}
-                  >
-                    Book now
-                  </button>
+              <li
+                key={index}
+                className="hover:cursor-pointer"
+                onClick={() => {
+                  setIsModalOpen(true);
+                  setModalProduct({
+                    id,
+                    hotel_name,
+                    hotel_location,
+                    hotel_image,
+                    hotel_description,
+                  });
+                }}
+              >
+                <div className="flex p-3 border-b-2 hover:bg-lightBlack hover:cursor-pointer transition-all duration-100">
+                  <span className="flex-1">{hotel_name}</span>
+                  <span className="flex-1">{hotel_location}</span>
+                  <span>Book now</span>
                 </div>
               </li>
             );
