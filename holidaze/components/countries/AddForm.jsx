@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
-import placeholder from "../../public/placeholder.jpeg";
+import placeholder from "../../public/image-blur-placeholder.png";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { BASE_URL, HOTELS, UPLOAD } from "../../constants/baseUrl";
