@@ -12,7 +12,7 @@ export default function Dashboard({ dashboard, setSideBar, showSideBar }) {
   switch (dashboard) {
     case "admin":
       return (
-        <div className="bg-white min-h-screen flex-1">
+        <div className="bg-white min-h-screen flex-1 pb-10">
           <header className="flex justify-center">
             <div
               onClick={setSideBar}
@@ -61,7 +61,7 @@ export default function Dashboard({ dashboard, setSideBar, showSideBar }) {
     // if accomodations return this
     case "accomodations":
       return (
-        <div className="bg-white min-h-screen flex-1">
+        <div className="bg-white min-h-screen flex-1 pb-10">
           <header className="flex justify-center">
             <div
               onClick={setSideBar}
@@ -100,7 +100,7 @@ export default function Dashboard({ dashboard, setSideBar, showSideBar }) {
       );
     case "add":
       return (
-        <div className="bg-white min-h-screen flex-1">
+        <div className="bg-white min-h-screen flex-1 pb-10">
           <header className="flex justify-center">
             <div
               onClick={setSideBar}
