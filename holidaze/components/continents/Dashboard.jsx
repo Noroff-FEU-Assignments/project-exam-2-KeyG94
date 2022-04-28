@@ -4,7 +4,7 @@ import AddForm from "../countries/AddForm";
 import CardTableEnquiries from "../countries/CardTableEnquiries";
 import CardTableMessages from "../countries/CardTableMessages";
 import * as FaIcons from "react-icons/fa";
-import * as GrIcons from "react-icons/Gr";
+import * as GrIcons from "react-icons/gr";
 import Link from "next/link";
 
 export default function Dashboard({ dashboard, setSideBar, showSideBar }) {
