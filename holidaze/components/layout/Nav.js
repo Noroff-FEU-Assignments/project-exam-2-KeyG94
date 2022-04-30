@@ -24,10 +24,6 @@ const Nav = () => {
     window.addEventListener("scroll", handleScroll);
   });
 
-  while (typeof window === "undefined") {
-    return <GKLoadingModal />;
-  }
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       const navbar = document.querySelector(".navbar");
