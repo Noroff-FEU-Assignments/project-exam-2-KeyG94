@@ -4,6 +4,7 @@ import Image from "next/image";
 import logo from "../../public/Asset 6.svg";
 import styles from "./Nav.module.scss";
 import AuthContext from "../../context/AuthContext";
+import GKLoadingModal from "../global/utills/GKLoadingModal";
 
 const Nav = () => {
   const [auth] = useContext(AuthContext);
@@ -23,15 +24,21 @@ const Nav = () => {
     window.addEventListener("scroll", handleScroll);
   });
 
-  if (typeof window !== "undefined") {
-    const navbar = document.querySelector(".navbar");
-
-    if (scrolled) {
-      navbar.classList.add("bg-darkBlack");
-    } else {
-      navbar.classList.remove("bg-darkBlack");
-    }
+  while (typeof window === "undefined") {
+    return <GKLoadingModal />;
   }
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const navbar = document.querySelector(".navbar");
+
+      if (scrolled) {
+        navbar.classList.add("bg-darkBlack");
+      } else {
+        navbar.classList.remove("bg-darkBlack");
+      }
+    }
+  });
 
   useEffect(() => {
     if (auth) {
