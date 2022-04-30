@@ -38,7 +38,7 @@ export default function BookNow({ product, closeModal }) {
       {/* The modal, stopPropagation to prevent bubbling */}
       <div
         id="booking-modal"
-        className="bg-silver p-5 w-80 mx-auto bg-opacity-95 text-black my-[10%] rounded-sm shadow relative flex justify-center"
+        className="bg-silver p-5 w-80 mx-auto bg-opacity-95 text-black my-[30%] rounded-sm shadow relative flex justify-center"
         onClick={(e) => e.stopPropagation()}
       >
         <GKCloseButton closeModal={closeModal} />
