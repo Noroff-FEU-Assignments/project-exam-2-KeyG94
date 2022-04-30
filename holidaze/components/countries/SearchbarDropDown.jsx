@@ -6,7 +6,7 @@ export default function SearchbarDropDown({ data, search }) {
   const [modalProduct, setModalProduct] = useState({});
 
   return (
-    <ul className="absolute w-full max-h-60 overflow-scroll -ml-2 mt-12 text-left bg-darkBlack">
+    <ul className="absolute w-full max-h-60 overflow-scroll -ml-2 mt-12 text-left bg-darkBlack border-t-2 border-t-orange">
       {isModalOpen && (
         <BookNow
           product={modalProduct}
