@@ -39,6 +39,6 @@ export async function getStaticProps() {
     props: {
       hotel,
     },
-    revalidate: 400,
+    revalidate: 60,
   };
 }
